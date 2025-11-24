@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Cadastro - Grão em Vida</title>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&family=Inter:wght@400;600;800&family=IBM+Plex+Sans:wght@400;500&display=swap" />
+
+    <style>
+        /* --- ESTILOS BASE PARA DESKTOP --- */
+        .cadastro-pessoas {
+            width: 100%;
+            height: 1913px; /* Altura mantida para desktop */
+            position: relative;
+            background-color: #f4fff8;
+            overflow-x: hidden;
+            text-align: left;
+            font-size: 16px;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Ocultar Lorems, visível apenas em altura específica, mantendo a estrutura original */
+        .lorem, .lorem2, .lorem3, .lorem4, .lorem5 { display: none; }
+        .image-11-icon {
+            position: absolute;
+            top: 127px;
+            left: 0px;
+            width: 100%;
+            height: 1237px;
+            object-fit: cover;
+        }
+        .cadastro-pessoas-child {
+            position: absolute;
+            top: 127px;
+            left: 0px;
+            background-color: rgba(0, 0, 0, 0.25);
+            width: 100%;
+            height: 1237px;
+        }
+
+        /* --- ESTILOS DO HEADER --- */
+        .cadastro-pessoas-child6 {
+            position: absolute;
+            top: 5px;
+            left: 0px;
+            background-color: #f4fff8;
+            width: 100%;
+            height: 124px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0 5%;
+            box-sizing: border-box;
+        }
+        .gro-em-vida, .gro-em-vida2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1e5d40;
+            width: auto;
+            position: static;
+        }
+        .agro-transparncia {
+            font-size: 15px;
+            color: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 67px;
+            left: 342px;
+        }
+        .inicio, .sobre, .projeto, .galeria, .contato, .cadastro2 {
+            font-weight: 600;
+            color: #1e5d40;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        .entrar-wrapper {
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+            background-color: #23a873;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            padding: 5px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .entrar-wrapper:hover {
+            background-color: #2fb882;
+            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.35);
+        }
+        .entrar { font-weight: 500; }
+        .chatgpt-image-4-de-nov-de-202 {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+        }
+
+        /* --- ESTILOS DO FORMULÁRIO (Desktop) --- */
+        .cadastro-pessoas-item {
+            position: absolute;
+            top: 361px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            background-color: #d6fae5;
+            width: 904px;
+            height: auto; /* Ajuste para acomodar o conteúdo refatorado */
+            padding: 20px 40px 60px 40px;
+            box-sizing: border-box;
+            color: #000;
+        }
+        .cadastro {
+            font-size: 40px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            color: #000;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .dados-pessoais, .validar-dados {
+            font-size: 20px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            color: #317b30;
+            display: inline-block;
+            margin-right: 50px;
+        }
+        .line-div { display: none; /* Simplificado */ }
+        .ellipse-div, .cadastro-pessoas-child5 { display: none; /* Simplificado */ }
+        
+        /* --- ESTILOS PARA CAMPOS DE INPUTS --- */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 5px;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+        .input-field {
+            width: 100%;
+            height: 48px;
+            padding: 0 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            background-color: #fff;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            color: #333;
+        }
+        .input-field:focus {
+            border-color: #1e5d40;
+            box-shadow: 0 0 0 2px rgba(30, 93, 64, 0.2);
+            outline: none;
+        }
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        .form-half { flex-basis: calc(50% - 10px); }
+
+        /* --- AVISOS E TERMOS --- */
+        .ateno-lorem-ipsum {
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            color: #74191a;
+            margin-top: 15px;
+        }
+        .terms-acceptance {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 15px;
+        }
+        .mdi-check-box-outline-blank-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            margin-right: 8px;
+        }
+        .aceito-lorem-ipsum {
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            color: #073773;
+            flex-grow: 1;
+        }
+
+        /* --- BOTÕES COM EFEITOS (Action Buttons) --- */
+        .button-container {
+            display: flex;
+            justify-content: flex-start;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .action-button {
+            height: 40px;
+            padding: 4px 20px;
+            border-radius: 6px;
+            background-color: #0e4d30;
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            text-align: center;
+            font-family: 'IBM Plex Sans', sans-serif;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            color: #fff;
+        }
+        .action-button:hover { background-color: #1e5d40; }
+        .action-button:active { transform: scale(0.98); }
+        .label2 {
+            color: #fff;
+            font-weight: 500;
+            line-height: 150%;
+        }
+
+        /* --- RODAPÉ --- */
+        .cadastro-pessoas-child7 {
+            background-color: #0e4d30;
+            width: 100%;
+            height: 549px;
+            position: absolute;
+            bottom: 0;
+            padding: 40px 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        .footer-group {
+            width: 20%;
+            min-width: 200px;
+            margin: 20px 10px;
+        }
+        .gro-em-vida2, .navegao, .contato2, .conecte-se {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .tecnologia-e-inovao, .incio, .sobre2, .projeto2, .galeria2, .rua-das-inovaes {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .rua-das-inovaes { white-space: pre-line; }
+        .social-icons { display: flex; gap: 15px; margin-top: 10px; }
+        .instagram-logo-icon, .facebook-icon, .google-icon {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+        }
+        .cadastro-pessoas-child8 { display: none; }
+
+        /* ---------------------------------------------------------------- */
+        /* --- RESPONSIVIDADE PARA TELAS PEQUENAS (Max-width: 768px) --- */
+        /* ---------------------------------------------------------------- */
+        @media (max-width: 950px) {
+             .cadastro-pessoas-item {
+                width: 90%;
+            }
+        }
+        @media (max-width: 768px) {
+            
+            .cadastro-pessoas {
+                height: auto;
+                padding-bottom: 0;
+            }
+
+            /* Ocultar elementos de fundo e Lorems */
+            .image-11-icon, .cadastro-pessoas-child, 
+            .lorem, .lorem2, .lorem3, .lorem4, .lorem5 {
+                display: none;
+            }
+
+            /* --- CABEÇALHO (Mobile) --- */
+            .cadastro-pessoas-child6 {
+                position: static;
+                height: auto;
+                padding: 15px 5%;
+                flex-direction: column;
+            }
+            .gro-em-vida { color: #1e5d40; }
+            .agro-transparncia { display: none; }
+            .inicio, .sobre, .projeto, .galeria, .contato, .cadastro2 {
+                display: none; /* Ocultar links de navegação principal */
+            }
+            .chatgpt-image-4-de-nov-de-202 {
+                margin-bottom: 10px;
+            }
+            .entrar-wrapper {
+                position: static;
+                margin-top: 10px;
+                width: 150px;
+            }
+
+            /* --- FORMULÁRIO DE CADASTRO (Mobile) --- */
+            .cadastro-pessoas-item {
+                position: static;
+                margin: 20px auto;
+                width: 95%;
+                padding: 20px;
+                transform: none;
+            }
+            
+            .cadastro { 
+                font-size: 30px; 
+                text-align: center;
+            }
+            .dados-pessoais, .validar-dados { 
+                display: block; 
+                text-align: center;
+                margin: 15px 0 5px;
+            }
+            
+            /* Reorganizar campos em linha para empilhar */
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .form-half {
+                flex-basis: 100%;
+            }
+
+            /* Botões */
+            .button-container {
+                justify-content: space-between;
+                margin-top: 30px;
+            }
+            .action-button {
+                width: 48%;
+            }
+
+            /* --- RODAPÉ (Mobile) --- */
+            .cadastro-pessoas-child7 {
+                position: static;
+                height: auto;
+                flex-direction: column;
+                padding: 30px 5%;
+                align-items: center;
+                text-align: center;
+            }
+            .footer-group {
+                width: 100%;
+                min-width: unset;
+                margin: 15px 0;
+            }
+            .gro-em-vida2, .navegao, .contato2, .conecte-se {
+                text-align: center;
+                width: 100%;
+            }
+            .social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="cadastro-pessoas">
+        <b class="lorem">Lorem</b>
+        <b class="lorem2">Lorem</b>
+        <b class="lorem3">Lorem</b>
+        <b class="lorem4">Lorem</b>
+        <b class="lorem5">Lorem</b>
+
+        <img class="image-11-icon" alt="Plantação ou campo agrícola">
+        <div class="cadastro-pessoas-child"></div>
+        
+        <div class="cadastro-pessoas-child6">
+            <img class="chatgpt-image-4-de-nov-de-202" alt="Logo Grão em Vida">
+            <div class="gro-em-vida">Grão em vida</div>
+            <div class="agro-transparncia">Agro • Transparência • Inovação</div>
+            
+            <div class="inicio" id="inicioText">Início</div>
+            <div class="sobre" id="sobreText">Sobre</div>
+            <div class="projeto" id="projetoText">Projeto</div>
+            <div class="galeria" id="galeriaText">Galeria</div>
+            <div class="contato" id="contatoText">Contato</div>
+            <div class="cadastro2">Cadastro</div>
+
+            <div class="entrar-wrapper" id="frameContainer">
+                <div class="entrar">Entrar</div>
+            </div>
+        </div>
+
+        <div class="cadastro-pessoas-item">
+            <div class="cadastro">Cadastro</div>
+            
+            <div style="margin-bottom: 20px;">
+                <div class="dados-pessoais">dados pessoais</div>
+                <div class="validar-dados">validar dados</div>
+            </div>
+
+            <form>
+                
+                <div class="form-group">
+                    <label for="nome" class="form-label">Nome Completo:</label>
+                    <input type="text" id="nome" class="input-field" placeholder="Digite seu nome completo">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" id="email" class="input-field" placeholder="ex:user@gmail.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="telefone" class="form-label">Telefone/WhatsApp:</label>
+                    <input type="tel" id="telefone" class="input-field" placeholder="ex:+55 21 994132-XXXX">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group form-half">
+                        <label for="nascimento" class="form-label">Data de Nascimento:</label>
+                        <input type="date" id="nascimento" class="input-field">
+                    </div>
+
+                    <div class="form-group form-half">
+                        <label for="genero" class="form-label">Gênero:</label>
+                        <select id="genero" class="input-field">
+                            <option value="" disabled selected>Selecione</option>
+                            <option value="f">Feminino</option>
+                            <option value="m">Masculino</option>
+                            <option value="o">Outro</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="senha" class="form-label">Senha:</label>
+                    <input type="password" id="senha" class="input-field" placeholder="password">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmar-senha" class="form-label">Confirmação de Senha:</label>
+                    <input type="password" id="confirmar-senha" class="input-field" placeholder="password: confirmação">
+                </div>
+
+                <div class="ateno-lorem-ipsum">Atenção: Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown</div>
+                
+                <div class="terms-acceptance">
+                    <img class="mdi-check-box-outline-blank-icon" alt="Checkbox">
+                    <div class="aceito-lorem-ipsum">aceito: Lorem Ipsum has been the industry's</div> 
+                </div>
+
+                <div class="button-container">
+                    <button type="button" class="action-button button2"><div class="label2">cancelar</div></button>
+                    <button type="submit" class="action-button button"><div class="label2">continuar</div></button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="cadastro-pessoas-child7">
+            <div class="footer-group">
+                <b class="gro-em-vida2">Grão em vida</b>
+                <div class="tecnologia-e-inovao">Tecnologia e inovação para transformar a agricultura familiar. Transparência, eficiência e impacto social real.</div>
+            </div>
+
+            <div class="footer-group">
+                <b class="navegao">Navegação</b>
+                <div class="incio" id="incioText">Início</div>
+                <div class="sobre2" id="sobreText1">Sobre</div>
+                <div class="projeto2" id="projetoText1">Projeto</div>
+                <div class="galeria2" id="galeriaText1">Galeria</div>
+            </div>
+            
+            <div class="footer-group">
+                <b class="contato2">Contato</b>
+                <div class="rua-das-inovaes">Rua das Inovações, 123<br>Bezerros, PE - Brasil<br>contato@gv.org.br<br>+55 (81) 99999-9999</div>
+            </div>
+
+            <div class="footer-group">
+                <b class="conecte-se">Conecte-se</b>
+                <div class="social-icons">
+                    <img class="instagram-logo-icon" alt="Ícone do Instagram">
+                    <img class="facebook-icon" alt="Ícone do Facebook">
+                    <img class="google-icon" alt="Ícone do Google">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Lógica dos Event Listeners (mantida a estrutura original)
+        var inicioText = document.getElementById("inicioText");
+        if(inicioText) {
+            inicioText.addEventListener("click", function (e) {
+                // Adicione seu código de navegação aqui
+            });
+        }
+        var sobreText = document.getElementById("sobreText");
+        if(sobreText) {
+            sobreText.addEventListener("click", function (e) {
+                // Adicione seu código de navegação aqui
+            });
+        }
+        // ... (Adicionar o restante dos listeners)
+    </script>
+</body>
+</html>

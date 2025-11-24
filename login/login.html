@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Grão em Vida</title>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <style>
+        /* --- RESET GERAL --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ecfdf3;
+            color: #333;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- HEADER --- */
+        header {
+            width: 100%;
+            height: 124px;
+            background-color: #f4fff8;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-left { display: flex; flex-direction: column; gap: 5px; }
+        .logo-text { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 800; color: #1e5d40; }
+        .slogan-text { font-family: 'Poppins', sans-serif; font-size: 14px; color: rgba(0, 0, 0, 0.5); }
+
+        .header-nav { display: flex; gap: 40px; align-items: center; }
+        .nav-link {
+            font-family: 'Poppins', sans-serif; font-weight: 600; color: #1e5d40;
+            text-decoration: none; font-size: 16px; cursor: pointer; transition: 0.3s;
+        }
+        .nav-link:hover { color: #0e4d30; }
+
+        .btn-entrar-nav {
+            padding: 10px 30px;
+            background-color: #23a873;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* --- LOGIN CONTAINER --- */
+        .login-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 124px); /* Altura total menos o header */
+            padding: 40px 20px;
+        }
+
+        .login-card {
+            background-color: #fff;
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* LADO ESQUERDO (Formulário) */
+        .form-side {
+            flex: 1;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 600;
+            color: #1e5d40;
+            margin-bottom: 10px;
+        }
+
+        .form-subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+        }
+
+        .form-input {
+            width: 100%;
+            height: 50px;
+            padding-left: 45px; /* Espaço para o ícone */
+            padding-right: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: #23a873;
+        }
+
+        .btn-login {
+            width: 100%;
+            height: 50px;
+            background-color: #23a873;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            background-color: #1b8a5e;
+        }
+
+        .divider {
+            margin: 30px 0;
+            text-align: center;
+            position: relative;
+        }
+        .divider span {
+            background: #fff;
+            padding: 0 10px;
+            position: relative;
+            z-index: 1;
+            color: #888;
+            font-size: 14px;
+        }
+        .divider::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #eee;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-social {
+            flex: 1;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .btn-social:hover {
+            background-color: #f9f9f9;
+        }
+
+        .footer-text {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .footer-text a {
+            color: #23a873;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* LADO DIREITO (Imagem) */
+        .image-side {
+            flex: 1;
+            background-color: #e0f2f1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .image-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 1024px) {
+            .header-nav { display: none; } /* Menu hambúrguer seria ideal aqui */
+            header { justify-content: center; flex-direction: column; padding: 20px; gap: 15px; height: auto;}
+            .btn-entrar-nav { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .login-card { flex-direction: column; } /* Empilha formulário e imagem */
+            .image-side { display: none; } /* Esconde a imagem no mobile para focar no login */
+            .form-side { padding: 40px 20px; }
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #0e4d30;
+            color: #fff;
+            padding: 60px 5%;
+            margin-top: auto;
+        }
+        .footer-content { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: 1400px; margin: 0 auto; }
+        .footer-col h3 { font-size: 20px; margin-bottom: 20px; font-family: 'Poppins'; }
+        .footer-col p, .footer-col a { color: #fff; text-decoration: none; display: block; margin-bottom: 10px; opacity: 0.9; }
+        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-box { width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 5px; display: flex; align-items: center; justify-content: center;}
+        
+        @media (max-width: 600px) { .footer-content { grid-template-columns: 1fr; text-align: center; } .social-icons { justify-content: center; } }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="logo-text">Grão em vida</div>
+            <div class="slogan-text">Agro • Transparência • Inovação</div>
+        </div>
+
+        <nav class="header-nav">
+            <a class="nav-link">Início</a>
+            <a class="nav-link">Sobre</a>
+            <a class="nav-link">Projeto</a>
+            <a class="nav-link">Galeria</a>
+            <a class="nav-link">Contato</a>
+        </nav>
+
+        <a href="#" class="btn-entrar-nav">Cadastro</a>
+    </header>
+
+    
+
+    <section class="login-section">
+        <div class="login-card">
+            
+            <div class="form-side">
+                <h1 class="form-title">Bem-vindo de volta!</h1>
+                <p class="form-subtitle">Por favor, insira seus dados para entrar.</p>
+
+                <form>
+                    <div class="input-group">
+                        <label>Email</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" class="form-input" placeholder="seu@email.com">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Senha</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" class="form-input" placeholder="********">
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-login" onclick="alert('Fazendo login...')">Entrar</button>
+                </form>
+
+                <div class="divider">
+                    <span>ou continue com</span>
+                </div>
+
+                <div class="social-buttons">
+                    <button class="btn-social">
+                        <i class="fab fa-google" style="color: #DB4437;"></i> Google
+                    </button>
+                    <button class="btn-social">
+                        <i class="fab fa-facebook-f" style="color: #4267B2;"></i> Facebook
+                    </button>
+                </div>
+
+                <p class="footer-text">
+                    Não tem uma conta? <a href="#">Cadastre-se</a>
+                </p>
+            </div>
+
+            <div class="image-side">
+                <img src="https://images.unsplash.com/photo-1625246333195-58197bd47d19?q=80&w=1964&auto=format&fit=crop" alt="Agricultura Familiar">
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Grão em vida</h3>
+                <p>Tecnologia e inovação para transformar a agricultura familiar.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Navegação</h3>
+                <a href="#">Início</a>
+                <a href="#">Sobre</a>
+                <a href="#">Projeto</a>
+                <a href="#">Galeria</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <p>Rua das Inovações, 123</p>
+                <p>Bezerros, PE - Brasil</p>
+                <p>+55 (81) 99999-9999</p>
+            </div>
+            <div class="footer-col">
+                <h3>Conecte-se</h3>
+                <div class="social-icons">
+                    <div class="social-box"><i class="fab fa-facebook-f"></i></div>
+                    <div class="social-box"><i class="fab fa-instagram"></i></div>
+                    <div class="social-box"><i class="fab fa-google"></i></div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

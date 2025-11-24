@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transparência - Grão em Vida</title>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <style>
+        /* --- RESET GERAL --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ecfdf3; /* Fundo verde claro */
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* --- VARIÁVEIS DE COR --- */
+        :root {
+            --color-primary: #1e5d40; /* Verde escuro (Texto/Logo) */
+            --color-secondary: #0e4d30; /* Verde mais escuro (Rodapé e Botão) */
+            --color-background-light: #f4fff8; /* Fundo do header */
+            --color-section-light: #d6fae5; /* Fundo da seção de Relatórios */
+            --color-text-placeholder: #b8bcca;
+        }
+
+        /* --- HEADER --- */
+        header {
+            width: 100%;
+            height: 124px;
+            background-color: var(--color-background-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-left { display: flex; align-items: center; gap: 10px; }
+        .logo-image { width: 60px; height: 60px; object-fit: cover; }
+        .logo-group { display: flex; flex-direction: column; gap: 0; }
+        .logo-text { font-size: 24px; font-weight: 800; color: var(--color-primary); }
+        .slogan-text { font-size: 15px; color: rgba(0, 0, 0, 0.5); font-weight: 500;}
+
+        .header-nav { display: flex; gap: 30px; align-items: center; font-size: 16px; }
+        .nav-link { font-weight: 600; color: var(--color-primary); text-decoration: none; cursor: pointer; transition: 0.3s; }
+        .nav-link:hover { color: var(--color-secondary); }
+
+        .header-profile { display: flex; align-items: center; gap: 15px; }
+        .profile-icon { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+        .sair-link { font-weight: 600; color: var(--color-primary); text-decoration: none; }
+
+
+        /* --- CONTEÚDO PRINCIPAL --- */
+        .main-content {
+            flex: 1;
+            padding: 40px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* --- SEÇÃO 1: ACESSO À INFORMAÇÃO / RELATÓRIOS --- */
+        .section-title {
+            font-size: 42px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .reports-section {
+            background-color: var(--color-section-light);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 60px;
+        }
+
+        .reports-section h3 {
+            font-size: 32px;
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 30px;
+            color: var(--color-secondary);
+        }
+
+        .filters-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px 40px;
+            margin-bottom: 40px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-label {
+            font-size: 24px;
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .date-input-container, .select-input-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .date-label {
+            font-size: 20px;
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 5px;
+        }
+
+        .text-input {
+            border-radius: 4px;
+            background-color: #f8fafc;
+            border: 1px solid #ccc;
+            padding: 12px 15px;
+            font-size: 16px;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .text-input input {
+            background: none;
+            border: none;
+            flex-grow: 1;
+            color: #333;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+        .text-input input::placeholder {
+             color: var(--color-text-placeholder);
+        }
+
+        .text-input i {
+            color: var(--color-text-placeholder);
+            font-size: 20px;
+        }
+
+        .btn-generate {
+            background-color: var(--color-secondary);
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 6px;
+            border: none;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+            align-self: flex-end; /* Alinha o botão à direita na coluna flex */
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+        .btn-generate:hover { background-color: #083c24; }
+
+
+        /* --- SEÇÃO 2: TOTAL DISTRIBUÍDO (GRÁFICOS) --- */
+        .distribution-section {
+            margin-bottom: 60px;
+        }
+
+        .distribution-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+
+        .dist-card {
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .dist-card h4 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 20px;
+        }
+
+        .dist-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+
+        /* --- SEÇÃO 3: LGPD --- */
+        .lgpd-section {
+            margin-bottom: 60px;
+            border-top: 1px solid #ccc;
+            padding-top: 40px;
+        }
+
+        .lgpd-content {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .lgpd-content i {
+            font-size: 60px;
+            color: var(--color-primary);
+        }
+
+        .lgpd-content a {
+            font-size: 32px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            color: #0e4d30;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .lgpd-content a:hover { color: #1e5d40; }
+
+
+        /* --- SEÇÃO 4: CERTIFICADOS IPA --- */
+        .certificados-section {
+            margin-bottom: 60px;
+        }
+
+        .certificados-list {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            padding: 30px 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .certificado-item {
+            text-align: center;
+        }
+
+        .certificado-item i {
+            font-size: 70px;
+            color: var(--color-primary);
+        }
+
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--color-secondary);
+            color: #fff;
+            padding: 60px 5%;
+            margin-top: auto;
+        }
+        .footer-content { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 30px; 
+            max-width: 1400px; 
+            margin: 0 auto; 
+        }
+        .footer-col h3 { font-size: 24px; margin-bottom: 20px; font-family: 'Inter'; font-weight: 700; }
+        .footer-col p, .footer-col a { color: #fff; text-decoration: none; display: block; margin-bottom: 10px; font-size: 20px; font-weight: 500; opacity: 0.9; }
+        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-box { width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 5px; display: flex; align-items: center; justify-content: center;}
+        .social-box i { font-size: 20px; }
+
+
+        /* --- MEDIA QUERIES --- */
+        @media (max-width: 1200px) {
+            .filters-container {
+                grid-template-columns: 1fr; /* Uma coluna para os filtros em telas menores */
+            }
+            .reports-section {
+                padding: 30px;
+            }
+            .reports-section h3 {
+                 font-size: 28px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title { font-size: 32px; }
+            
+            header { 
+                height: auto; 
+                flex-direction: column; 
+                align-items: flex-start; 
+                padding: 15px;
+            }
+            .header-left { width: 100%; justify-content: space-between; }
+            .header-nav { display: none; } /* Navegação principal pode ser escondida/trocada por menu sanduíche */
+            .header-profile { margin-top: 10px; }
+
+            .distribution-cards { grid-template-columns: 1fr; }
+            .lgpd-content { flex-direction: column; text-align: center; }
+            .lgpd-content a { font-size: 24px; }
+            .certificados-list { flex-wrap: wrap; justify-content: center; }
+
+            .footer-content { grid-template-columns: 1fr; text-align: center; }
+            .social-icons { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <img src="https://i.imgur.com/G3P2q2K.png" alt="Logo" class="logo-image">
+            <div class="logo-group">
+                <div class="logo-text">Grão em vida</div>
+                <div class="slogan-text">Agro • Transparência • Inovação</div>
+            </div>
+        </div>
+
+        <nav class="header-nav">
+            <a class="nav-link" href="#" id="inicioText">Início</a>
+            <a class="nav-link" href="#" id="sobreText1">Sobre</a>
+            <a class="nav-link" href="#" id="projetoText1">Projeto</a>
+            <a class="nav-link" href="#" id="galeriaText1">Galeria</a>
+            <a class="nav-link" href="#" id="contatoText1">Contato</a>
+        </nav>
+
+        <div class="header-profile">
+            <img src="https://i.imgur.com/user-profile.png" alt="Perfil" class="profile-icon">
+            <a class="sair-link" href="#">Sair</a>
+        </div>
+    </header>
+
+    <div class="main-content">
+        
+        <h2 class="section-title">Acesso à informação</h2>
+        <div class="reports-section">
+            <h3>Relatórios</h3>
+            
+            <div class="filters-container">
+                
+                <div class="filter-column">
+                    <div class="filter-group">
+                        <label class="filter-label">Tipo</label>
+                        <div class="select-input-container">
+                            <div class="text-input">
+                                <input type="text" placeholder="Selecione o tipo de relatório" readonly>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group" style="margin-top: 20px;">
+                        <label class="filter-label">Formato</label>
+                        <div class="select-input-container">
+                            <div class="text-input">
+                                <input type="text" placeholder="Selecione o formato de saída (ex: PDF, CSV)" readonly>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-column">
+                    <label class="filter-label">Período</label>
+                    <div class="input-group">
+                        <div class="date-input-container">
+                            <label class="date-label">Início</label>
+                            <div class="text-input">
+                                <input type="text" placeholder="DD/MM/AAAA">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                        </div>
+                        <div class="date-input-container">
+                            <label class="date-label">Fim</label>
+                            <div class="text-input">
+                                <input type="text" placeholder="DD/MM/AAAA">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-generate">Gerar Relatório</button>
+        </div>
+        
+
+        <h2 class="section-title">Total distribuído por</h2>
+        <div class="distribution-section">
+            <div class="distribution-cards">
+                
+                <div class="dist-card">
+                    <h4>Período</h4>
+                    
+
+[Image of a time series chart showing distribution over a period]
+
+                    </div>
+                
+                <div class="dist-card">
+                    <h4>Espécies</h4>
+                    
+                    </div>
+                
+                <div class="dist-card">
+                    <h4>Municípios</h4>
+                    
+                    </div>
+
+            </div>
+        </div>
+
+        <h2 class="section-title">LGPD - Adequação Legal</h2>
+        <div class="lgpd-section">
+            <div class="lgpd-content">
+                <i class="fas fa-file-contract"></i>
+                <a href="#">Ler a íntegra da Lei nº 13.709/2018 (LGPD)</a>
+            </div>
+        </div>
+
+        <h2 class="section-title">Certificados IPA</h2>
+        <div class="certificados-section">
+            <div class="certificados-list">
+                <div class="certificado-item">
+                    <i class="fas fa-award"></i>
+                    </div>
+                 <div class="certificado-item">
+                    <i class="fas fa-certificate"></i>
+                    </div>
+                <div class="certificado-item">
+                    <i class="fas fa-shield-alt"></i>
+                    </div>
+                <div class="certificado-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    </div>
+                 <div class="certificado-item">
+                    <i class="fas fa-check-circle"></i>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Grão em vida</h3>
+                <p>Tecnologia e inovação para transformar a agricultura familiar. Transparência, eficiência e impacto social real.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Navegação</h3>
+                <a href="#" id="incioText">Início</a>
+                <a href="#" id="sobreText">Sobre</a>
+                <a href="#" id="projetoText">Projeto</a>
+                <a href="#" id="galeriaText">Galeria</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <p>Rua das Inovações, 123</p>
+                <p>Bezerros, PE - Brasil</p>
+                <p>contato@gv.org.br</p>
+                <p>+55 (81) 99999-9999</p>
+            </div>
+            <div class="footer-col">
+                <h3>Conecte-se</h3>
+                <div class="social-icons">
+                    <div class="social-box"><i class="fab fa-instagram"></i></div>
+                    <div class="social-box"><i class="fab fa-facebook-f"></i></div>
+                    <div class="social-box"><i class="fab fa-google"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="line-div"></div>
+    </footer>
+
+    <script>
+        // Funções de navegação simples (simulando o comportamento do original)
+        document.querySelectorAll('.nav-link, .footer-col a').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log(`Navegar para: ${e.target.textContent}`);
+            });
+        });
+
+        document.querySelector('.sair-link').addEventListener('click', function(e) {
+             e.preventDefault();
+            console.log('Usuário deslogado');
+        });
+
+        document.querySelector('.btn-generate').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Gerando Relatório...');
+        });
+    </script>
+</body>
+</html>

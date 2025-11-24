@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Sementes - Grão em Vida</title>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <style>
+        /* --- RESET GERAL --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4fff8; /* Fundo verde claro */
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* --- VARIÁVEIS DE COR --- */
+        :root {
+            --color-primary: #1e5d40; /* Verde escuro (Texto/Logo) */
+            --color-secondary: #0e4d30; /* Verde mais escuro (Rodapé e Botão) */
+            --color-background-light: #f4fff8; /* Fundo do header */
+            --color-form-background: #d6fae5; /* Fundo do formulário */
+            --color-input-background: #fff;
+            --color-placeholder: #b8bcca;
+            --color-attention: #7c2f32; /* Cor de atenção/alerta */
+            --color-accept: #073773; /* Cor de aceitação */
+        }
+
+        /* --- LAYOUT PRINCIPAL --- */
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Imagem de Fundo (Simulada) */
+        .background-image {
+            position: fixed;
+            top: 124px; /* Abaixo do header */
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 124px); /* Altura da viewport menos o header */
+            background-image: url('https://i.imgur.com/your-grain-storage-image.jpg'); /* URL simulada para a imagem de grãos */
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        .background-overlay {
+            position: fixed;
+            top: 124px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 124px);
+            background-color: rgba(0, 0, 0, 0.37); /* Overlay escuro */
+            z-index: 2;
+        }
+
+        /* --- HEADER (Reutilizado do exemplo anterior) --- */
+        header {
+            width: 100%;
+            height: 124px;
+            background-color: var(--color-background-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-left { display: flex; align-items: center; gap: 10px; }
+        .logo-image { width: 60px; height: 60px; object-fit: cover; }
+        .logo-group { display: flex; flex-direction: column; gap: 0; }
+        .logo-text { font-size: 24px; font-weight: 800; color: var(--color-primary); }
+        .slogan-text { font-size: 15px; color: rgba(0, 0, 0, 0.5); font-weight: 500;}
+
+        .header-nav { display: flex; gap: 30px; align-items: center; font-size: 16px; }
+        .nav-link { font-weight: 600; color: var(--color-primary); text-decoration: none; cursor: pointer; transition: 0.3s; }
+        .nav-link:hover { color: var(--color-secondary); }
+
+        .header-profile { display: flex; align-items: center; gap: 15px; }
+        .profile-icon { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+        .sair-link { font-weight: 600; color: var(--color-primary); text-decoration: none; }
+
+        /* --- CONTEÚDO PRINCIPAL (FORMULÁRIO) --- */
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+            position: relative;
+            z-index: 3; /* Acima do overlay */
+        }
+
+        .form-card {
+            background-color: var(--color-form-background);
+            border: 1px solid #23a873;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 850px;
+            width: 100%;
+        }
+
+        .form-card h2 {
+            font-size: 40px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            color: #000;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        /* Ajuste para campos de largura total */
+        .full-width {
+            grid-column: 1 / -1; 
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #000; /* Cor do rótulo */
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+
+        .input-box {
+            background-color: var(--color-input-background);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 0 12px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-box input, .input-box select {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: none;
+            font-size: 16px;
+            color: #333;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+
+        .input-box input::placeholder, .input-box select.placeholder {
+            color: var(--color-placeholder);
+        }
+
+        .input-box i {
+            color: var(--color-placeholder);
+            margin-left: 10px;
+        }
+        
+        /* Checkbox e Avisos */
+        .info-section {
+            grid-column: 1 / -1;
+            margin-top: 20px;
+        }
+
+        .attention-text {
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            color: var(--color-attention);
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            color: var(--color-accept);
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        /* Botões */
+        .form-actions {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 8px 25px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-transform: uppercase;
+            color: #fff;
+            border: none;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+
+        .btn-continue {
+            background-color: var(--color-secondary);
+        }
+        .btn-continue:hover {
+            background-color: #083c24;
+        }
+
+        .btn-cancel {
+            background-color: #777; /* Cor neutra para cancelar */
+        }
+        .btn-cancel:hover {
+            background-color: #555;
+        }
+
+
+        /* --- FOOTER (Reutilizado do exemplo anterior) --- */
+        footer {
+            background-color: var(--color-secondary);
+            color: #fff;
+            padding: 60px 5%;
+            margin-top: auto;
+            position: relative;
+            z-index: 5;
+        }
+        .footer-content { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 30px; 
+            max-width: 1400px; 
+            margin: 0 auto; 
+        }
+        .footer-col h3 { font-size: 24px; margin-bottom: 20px; font-family: 'Inter'; font-weight: 700; }
+        .footer-col p, .footer-col a { color: #fff; text-decoration: none; display: block; margin-bottom: 10px; font-size: 20px; font-weight: 500; opacity: 0.9; }
+        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-box { width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 5px; display: flex; align-items: center; justify-content: center;}
+        .social-box i { font-size: 20px; }
+
+
+        /* --- MEDIA QUERIES --- */
+        @media (max-width: 1024px) {
+            .form-fields {
+                grid-template-columns: 1fr; /* Uma coluna em telas menores */
+            }
+            .header-nav { display: none; }
+            .form-actions {
+                justify-content: center;
+            }
+        }
+         @media (max-width: 768px) {
+            .form-card {
+                padding: 20px;
+            }
+             header { 
+                height: auto; 
+                flex-direction: column; 
+                align-items: flex-start; 
+                padding: 15px;
+            }
+            .header-left { width: 100%; justify-content: space-between; }
+            .header-profile { margin-top: 10px; }
+            .footer-content { grid-template-columns: 1fr; text-align: center; }
+            .social-icons { justify-content: center; }
+            .background-image, .background-overlay {
+                background-attachment: scroll; /* Melhora o desempenho em mobile */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+        <div class="background-image"></div>
+        <div class="background-overlay"></div>
+        
+        <header>
+            <div class="header-left">
+                <img src="https://i.imgur.com/G3P2q2K.png" alt="Logo" class="logo-image">
+                <div class="logo-group">
+                    <div class="logo-text">Grão em vida</div>
+                    <div class="slogan-text">Agro • Transparência • Inovação</div>
+                </div>
+            </div>
+
+            <nav class="header-nav">
+                <a class="nav-link" href="#" id="inicioText">Início</a>
+                <a class="nav-link" href="#" id="sobreText1">Sobre</a>
+                <a class="nav-link" href="#" id="projetoText1">Projeto</a>
+                <a class="nav-link" href="#" id="galeriaText1">Galeria</a>
+                <a class="nav-link" href="#" id="contatoText1">Contato</a>
+            </nav>
+
+            <div class="header-profile">
+                <img src="https://i.imgur.com/user-profile.png" alt="Perfil" class="profile-icon">
+                <a class="sair-link" href="#">Sair</a>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="form-card">
+                <h2>Cadastro Sementes</h2>
+                
+                <form class="form-fields">
+                    
+                    <div class="input-group">
+                        <label for="tipo">Tipo</label>
+                        <div class="input-box">
+                             <select id="tipo">
+                                <option value="" selected disabled class="placeholder">Selecione o Tipo</option>
+                                <option value="milho">Milho</option>
+                                <option value="feijao">Feijão</option>
+                                <option value="arroz">Arroz</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="data-aquisicao">Data de Aquisição</label>
+                        <div class="input-box">
+                            <input type="text" id="data-aquisicao" placeholder="DD/MM/AAAA">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="nome-semente">Nome Semente</label>
+                        <div class="input-box">
+                            <input type="text" id="nome-semente" placeholder="Nome da semente (Ex: Semente Crioula)">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="numero-lote">Número de Lote</label>
+                        <div class="input-box">
+                            <input type="text" id="numero-lote" placeholder="Número do lote (Ex: LOTE202401)">
+                        </div>
+                    </div>
+
+                    <div class="input-group full-width">
+                        <label for="nome-fornecedor">Nome Fornecedor</label>
+                        <div class="input-box">
+                            <input type="text" id="nome-fornecedor" placeholder="Nome completo do fornecedor">
+                        </div>
+                    </div>
+
+                    <div class="input-group full-width">
+                        <label for="nome-armazem">Nome Armazém</label>
+                        <div class="input-box">
+                            <input type="text" id="nome-armazem" placeholder="Nome do Armazém onde a semente será estocada">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="nome-agricultor">Nome Agricultor</label>
+                        <div class="input-box">
+                            <input type="text" id="nome-agricultor" placeholder="Nome do agricultor responsável">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="municipio">Município</label>
+                        <div class="input-box">
+                             <select id="municipio">
+                                <option value="" selected disabled class="placeholder">Selecione o Município</option>
+                                <option value="bezerros">Bezerros</option>
+                                <option value="caruaru">Caruaru</option>
+                                <option value="recife">Recife</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="info-section">
+                        <p class="attention-text">
+                            Atenção: Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+                        </p>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="aceite">
+                            <label for="aceite">Aceito: Lorem Ipsum has been the industry's</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-cancel">Cancelar</button>
+                        <button type="submit" class="btn btn-continue">Continuar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Grão em vida</h3>
+                    <p>Tecnologia e inovação para transformar a agricultura familiar. Transparência, eficiência e impacto social real.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Navegação</h3>
+                    <a href="#" id="incioText">Início</a>
+                    <a href="#" id="sobreText">Sobre</a>
+                    <a href="#" id="projetoText">Projeto</a>
+                    <a href="#" id="galeriaText">Galeria</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Contato</h3>
+                    <p>Rua das Inovações, 123</p>
+                    <p>Bezerros, PE - Brasil</p>
+                    <p>contato@gv.org.br</p>
+                    <p>+55 (81) 99999-9999</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Conecte-se</h3>
+                    <div class="social-icons">
+                        <div class="social-box"><i class="fab fa-instagram"></i></div>
+                        <div class="social-box"><i class="fab fa-facebook-f"></i></div>
+                        <div class="social-box"><i class="fab fa-google"></i></div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Funções de navegação simples (simulando o comportamento do original)
+        document.querySelectorAll('.nav-link, .footer-col a').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log(`Navegar para: ${e.target.textContent}`);
+            });
+        });
+        document.querySelector('.sair-link').addEventListener('click', function(e) {
+             e.preventDefault();
+            console.log('Usuário deslogado');
+        });
+
+        document.querySelector('.form-fields').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const aceite = document.getElementById('aceite').checked;
+            if (!aceite) {
+                alert('Você deve aceitar os termos para continuar.');
+                return;
+            }
+            alert('Formulário de Cadastro de Sementes Enviado!');
+            // Código para processar o formulário
+        });
+
+        document.querySelector('.btn-cancel').addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm('Tem certeza que deseja cancelar o cadastro?')) {
+                console.log('Cadastro Cancelado');
+                // Adicione a lógica de redirecionamento ou limpeza de formulário
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Controle - Grão em Vida</title>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+
+    <style>
+        /* --- RESET GERAL --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ecfdf3;
+            color: #333;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- HEADER --- */
+        header {
+            width: 100%;
+            height: 124px;
+            background-color: #f4fff8;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .header-left { display: flex; flex-direction: column; gap: 5px; }
+        .logo-text { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 800; color: #1e5d40; }
+        .slogan-text { font-family: 'Poppins', sans-serif; font-size: 14px; color: rgba(0, 0, 0, 0.5); }
+
+        .header-nav { display: flex; gap: 40px; align-items: center; }
+        .nav-link {
+            font-family: 'Poppins', sans-serif; font-weight: 600; color: #1e5d40;
+            text-decoration: none; font-size: 16px; cursor: pointer;
+        }
+        .header-right { display: flex; align-items: center; gap: 20px; }
+        .profile-icon { width: 50px; height: 50px; border-radius: 50%; background-color: #ccc; object-fit: cover; }
+        .btn-sair { font-family: 'Poppins', sans-serif; font-weight: 600; color: #1e5d40; cursor: pointer; }
+
+        /* --- CONTEÚDO DO DASHBOARD --- */
+        .main-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            flex: 1;
+        }
+
+        /* Título da Seção */
+        .section-header {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 42px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        /* GRID PRINCIPAL DE KPIS (Entradas, Saídas, etc) */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .kpi-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #23a873;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .kpi-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1e5d40;
+            margin-bottom: 10px;
+        }
+
+        .kpi-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        /* ÁREA AZUL (Dashboard Card) */
+        .dashboard-big-card {
+            background-color: #b3cddc; /* Azul do design original */
+            border: 1px solid #23a873;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Grid interno do cartão azul */
+        .charts-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Duas colunas iguais */
+            gap: 40px;
+        }
+
+        /* Coluna da esquerda e direita */
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .chart-block {
+            background-color: rgba(255,255,255,0.3); /* Fundo sutil para o gráfico */
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .chart-header {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #000;
+            align-self: flex-start;
+        }
+
+        .chart-img {
+            width: 100%;
+            height: auto;
+            max-height: 250px;
+            object-fit: contain;
+            /* Placeholder styles */
+            background-color: rgba(255,255,255,0.5);
+            border-radius: 10px;
+        }
+
+        /* LISTAS (Lorem Ipsum) */
+        .lists-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .list-box h4 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .list-box ul {
+            list-style: none;
+            padding-left: 20px;
+            border-left: 3px solid #1e5d40;
+        }
+
+        .list-box li {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 1024px) {
+            .charts-layout { grid-template-columns: 1fr; } /* Vira 1 coluna no tablet */
+            .header-nav { display: none; }
+            header { flex-direction: column; height: auto; padding: 20px; gap: 15px; }
+        }
+
+        @media (max-width: 768px) {
+            .lists-container { grid-template-columns: 1fr; }
+            .section-title { font-size: 32px; }
+            .kpi-grid { grid-template-columns: 1fr; } /* KPIs empilhados no mobile */
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #0e4d30;
+            color: #fff;
+            padding: 60px 5%;
+            margin-top: auto; /* Empurra footer para baixo */
+        }
+        .footer-content { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: 1400px; margin: 0 auto; }
+        .footer-col h3 { font-size: 20px; margin-bottom: 20px; }
+        .footer-col p, .footer-col a { color: #fff; text-decoration: none; display: block; margin-bottom: 10px; opacity: 0.9; }
+        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-box { width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 5px; display: flex; align-items: center; justify-content: center;}
+
+        /* MOBILE FOOTER */
+        @media (max-width: 600px) { .footer-content { grid-template-columns: 1fr; text-align: center; } .social-icons { justify-content: center; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="logo-text">Grão em vida</div>
+            <div class="slogan-text">Agro • Transparência • Inovação</div>
+        </div>
+
+        <nav class="header-nav">
+            <a class="nav-link">Início</a>
+            <a class="nav-link">Sobre</a>
+            <a class="nav-link">Projeto</a>
+            <a class="nav-link">Galeria</a>
+            <a class="nav-link">Contato</a>
+        </nav>
+
+        <div class="header-right">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Perfil" class="profile-icon">
+            <div class="btn-sair">Sair</div>
+        </div>
+    </header>
+
+    
+
+    <main class="main-container">
+        
+        <div class="section-header">
+            <h1 class="section-title">Painel de Controle</h1>
+            <p>Visão geral de movimentações e estoque</p>
+        </div>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-title">Movimentação</div>
+                <div class="kpi-value">1.250</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Entradas</div>
+                <div class="kpi-value">R$ 45.000</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Saídas</div>
+                <div class="kpi-value">R$ 12.000</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-title">Saldo</div>
+                <div class="kpi-value" style="color: #23a873;">R$ 33.000</div>
+            </div>
+        </div>
+
+        <div class="dashboard-big-card">
+            <h2 style="font-family: 'Inter'; margin-bottom: 30px; text-align: center;">Controle de Estoque</h2>
+
+            <div class="charts-layout">
+                <div class="column">
+                    <div class="chart-block">
+                        <div class="chart-header">Nº de Lotes</div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/2822/2822695.png" class="chart-img" alt="Gráfico de Lotes">
+                    </div>
+                    
+                    <div class="chart-block">
+                        <div class="chart-header">Quantidade Total</div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/3094/3094851.png" class="chart-img" alt="Gráfico Quantidade">
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="chart-block">
+                        <div class="chart-header">Validade / Espécies</div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/404/404621.png" class="chart-img" alt="Gráfico Validade">
+                    </div>
+                    
+                    <div class="chart-block">
+                        <div class="chart-header">Performance</div>
+                        <img src="https://cdn-icons-png.flaticon.com/512/1541/1541458.png" class="chart-img" alt="Gráfico Performance">
+                    </div>
+                </div>
+            </div>
+
+            <div class="lists-container">
+                <div class="list-box">
+                    <h4>Histórico Recente</h4>
+                    <ul>
+                        <li>Entrada de Milho - Lote A23</li>
+                        <li>Saída de Feijão - Lote B12</li>
+                        <li>Atualização de Cadastro</li>
+                        <li>Entrada de Sementes - Lote C99</li>
+                        <li>Verificação de Estoque</li>
+                    </ul>
+                </div>
+                <div class="list-box">
+                    <h4>Alertas de Sistema</h4>
+                    <ul>
+                        <li>Validade Próxima - Lote F40</li>
+                        <li>Estoque Baixo - Soja</li>
+                        <li>Backup Realizado com Sucesso</li>
+                        <li>Novo Usuário Cadastrado</li>
+                        <li>Manutenção Agendada</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Grão em vida</h3>
+                <p>Tecnologia e inovação para transformar a agricultura familiar.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Navegação</h3>
+                <a href="#">Início</a>
+                <a href="#">Sobre</a>
+                <a href="#">Projeto</a>
+                <a href="#">Galeria</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <p>Rua das Inovações, 123</p>
+                <p>Bezerros, PE - Brasil</p>
+                <p>+55 (81) 99999-9999</p>
+            </div>
+            <div class="footer-col">
+                <h3>Conecte-se</h3>
+                <div class="social-icons">
+                    <div class="social-box">FB</div>
+                    <div class="social-box">IG</div>
+                    <div class="social-box">GL</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

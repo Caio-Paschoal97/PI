@@ -1,0 +1,983 @@
+/* index.css - estilos do layout (mantidos conforme seu design 1920px) */
+
+/* viewport-wrapper centraliza horizontalmente o layout escalado */
+.viewport-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* centralizado horizontalmente */
+    align-items: flex-start;
+    overflow: hidden;
+    position: relative;
+}
+
+/* .home é o "canvas" do Figma com largura fixa de 1920px */
+.home {
+    width: 1920px;
+    height: 4954px; /* mantém sua altura original para cálculo */
+    position: relative;
+
+    overflow: visible;
+    text-align: left;
+    font-size: 20px;
+    color: #215c3d;
+    font-family: Poppins, sans-serif;
+}
+
+/* --- SEUS ESTILOS ORIGINAIS AQUI --- */
+.home-child {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #f4fff8;
+    width: 1920px;
+    height: 124px;
+    flex-shrink: 0;
+}
+.inicio {
+    position: absolute;
+    top: 44px;
+    left: 801px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e5d40;
+    display: inline-block;
+    width: 81px;
+    height: 36px;
+    flex-shrink: 0;
+}
+.agro-transparncia {
+    position: absolute;
+    top: 62px;
+    left: 342px;
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    width: 402px;
+    height: 36px;
+    flex-shrink: 0;
+}
+.gro-em-vida {
+    position: absolute;
+    top: 24px;
+    left: 342px;
+    font-size: 24px;
+    font-weight: 800;
+    color: #1e5d40;
+    display: inline-block;
+    width: 166px;
+    height: 36px;
+    flex-shrink: 0;
+}
+.sobre {
+    position: absolute;
+    top: 44px;
+    left: 915px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e5d40;
+    display: inline-block;
+    width: 81px;
+    height: 31px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.galeria {
+    position: absolute;
+    top: 44px;
+    left: 1155px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e5d40;
+    display: inline-block;
+    width: 97px;
+    height: 36px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.contato {
+    position: absolute;
+    top: 44px;
+    left: 1285px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e5d40;
+    display: inline-block;
+    width: 102px;
+    height: 36px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.cadastro {
+    position: absolute;
+    top: 44px;
+    left: 1396px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e5d40;
+    display: inline-block;
+    width: 102px;
+    height: 36px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.projeto {
+    position: absolute;
+    top: 44px;
+    left: 1029px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e5d40;
+    display: inline-block;
+    width: 93px;
+    height: 36px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.home-item {
+    position: absolute;
+    top: 215px;
+    left: 279px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    background-color: #23a873;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    width: 162px;
+    height: 28px;
+    flex-shrink: 0;
+}
+.home-inner {
+    position: absolute;
+    top: 534px;
+    left: 279px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    background-color: rgba(35, 168, 115, 0);
+    border: 2px solid #23a873;
+    box-sizing: border-box;
+    width: 162px;
+    height: 28px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.programa-gro-em {
+    position: absolute;
+    top: 222px;
+    left: 299px;
+    font-size: 10px;
+    font-weight: 500;
+    color: #fff;
+    display: inline-block;
+    width: 123px;
+    height: 21px;
+    flex-shrink: 0;
+}
+.comear-agora {
+    position: absolute;
+    top: 540px;
+    left: 317px;
+    font-size: 10px;
+    font-weight: 500;
+    color: #23a873;
+    display: inline-block;
+    width: 86px;
+    height: 15px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.revolucionando-a-distribuio {
+    position: absolute;
+    top: 289px;
+    left: 279px;
+    font-size: 32px;
+    font-weight: 600;
+    color: #000;
+    display: inline-block;
+    width: 747px;
+    height: 106px;
+    flex-shrink: 0;
+}
+.inovao-que-transforma {
+    position: absolute;
+    top: 845px;
+    left: 279px;
+    font-size: 32px;
+    font-weight: 600;
+    display: inline-block;
+    width: 435px;
+    height: 95px;
+    flex-shrink: 0;
+}
+.tecnologia-que-faz {
+    position: absolute;
+    top: 1774px;
+    left: 635px;
+    font-size: 40px;
+    font-weight: 600;
+    display: inline-block;
+    width: 650px;
+    height: 60px;
+    flex-shrink: 0;
+}
+.gesto-de-estoque {
+    position: absolute;
+    top: 1935px;
+    left: 1163px;
+    font-size: 36px;
+    font-weight: 600;
+    white-space: pre-wrap;
+    display: inline-block;
+    width: 373px;
+    height: 65px;
+    flex-shrink: 0;
+}
+.rastreabilidade-em-tempo {
+    position: absolute;
+    top: 2956px;
+    left: 1057px;
+    font-size: 36px;
+    font-weight: 600;
+    display: inline-block;
+    width: 584px;
+    height: 54px;
+    flex-shrink: 0;
+}
+.nossa-jornada-em {
+    position: absolute;
+    top: 3423px;
+    left: 663px;
+    font-size: 40px;
+    font-weight: 600;
+    display: inline-block;
+    width: 595px;
+    height: 60px;
+    flex-shrink: 0;
+}
+.parceiros-estratgicos {
+    position: absolute;
+    top: 3944px;
+    left: 725px;
+    font-size: 40px;
+    font-weight: 600;
+    display: inline-block;
+    width: 471px;
+    height: 60px;
+    flex-shrink: 0;
+}
+.logstica-conectada {
+    position: absolute;
+    top: 2437px;
+    left: 411px;
+    font-size: 36px;
+    font-weight: 600;
+    display: inline-block;
+    width: 385px;
+    height: 54px;
+    flex-shrink: 0;
+}
+.plataforma-completa-para {
+    position: absolute;
+    top: 404px;
+    left: 279px;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.7);
+    display: inline-block;
+    width: 617px;
+    height: 88px;
+    flex-shrink: 0;
+}
+.rectangle-div {
+    position: absolute;
+    top: 626px;
+    left: 279px;
+	box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    background-color: #fff;
+	border: calc(1px / var(--scale-factor)) solid #23a873;
+    box-sizing: border-box;
+    width: 185px;
+    height: 167px;
+    flex-shrink: 0;
+}
+.home-child2 {
+    position: absolute;
+    top: 626px;
+    left: 495px;
+	box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    background-color: #fff;
+	border: calc(1px / var(--scale-factor)) solid #23a873;
+    box-sizing: border-box;
+    width: 185px;
+    height: 167px;
+    flex-shrink: 0;
+}
+.home-child3 {
+    position: absolute;
+    top: 627px;
+    left: 711px;
+	box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    background-color: #fff;
+	border: calc(1px / var(--scale-factor)) solid #23a873;
+    box-sizing: border-box;
+    width: 185px;
+    height: 167px;
+    flex-shrink: 0;
+}
+.home-child4 {
+    position: absolute;
+    top: 1126px;
+    left: 279px;
+	box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    background-color: #fff;
+	border: calc(1px / var(--scale-factor)) solid #23a873;
+    box-sizing: border-box;
+    width: 586px;
+    height: 167px;
+    flex-shrink: 0;
+}
+.home-child5 {
+    position: absolute;
+    top: 1321px;
+    left: 279px;
+	box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    background-color: #fff;
+	border: calc(1px / var(--scale-factor)) solid #23a873;
+    box-sizing: border-box;
+    width: 586px;
+    height: 167px;
+    flex-shrink: 0;
+}
+.home-child6 {
+    position: absolute;
+    top: 1516px;
+    left: 279px;
+	box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    background-color: #fff;
+	border: calc(1px / var(--scale-factor)) solid #23a873;
+    box-sizing: border-box;
+    width: 586px;
+    height: 167px;
+    flex-shrink: 0;
+}
+.home-child7 {
+    position: absolute;
+    top: 229px;
+    left: 1328px;
+    box-shadow: 0px 4px 4px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    background-color: #fff;
+	border: calc(1px / var(--scale-factor)) solid #23a873;
+    box-sizing: border-box;
+    width: 313px;
+    height: 398px;
+    flex-shrink: 0;
+}
+.lotes-rastreados {
+    position: absolute;
+    top: 719px;
+    left: 325px;
+    font-size: 15px;
+    font-weight: 300;
+    white-space: pre-wrap;
+    display: inline-block;
+    width: 93px;
+    height: 46px;
+    flex-shrink: 0;
+}
+.famlias-atendidas {
+    position: absolute;
+    top: 711px;
+    left: 545px;
+    font-size: 15px;
+    font-weight: 300;
+    white-space: pre-wrap;
+    display: inline-block;
+    width: 93px;
+    height: 46px;
+    flex-shrink: 0;
+}
+.kg-distribudos {
+    position: absolute;
+    top: 719px;
+    left: 750px;
+    font-size: 15px;
+    font-weight: 300;
+    display: inline-block;
+    width: 114px;
+    height: 23px;
+    flex-shrink: 0;
+}
+.crescimento-de {
+    position: absolute;
+    top: 574px;
+    left: 1353px;
+    font-weight: 300;
+    display: inline-block;
+    width: 201px;
+    height: 36px;
+    flex-shrink: 0;
+}
+.div {
+    position: absolute;
+    top: 655px;
+    left: 340px;
+    font-size: 32px;
+    font-weight: 800;
+    color: #1e5d40;
+    display: inline-block;
+    width: 60px;
+    height: 47px;
+    flex-shrink: 0;
+}
+.div2 {
+    position: absolute;
+    top: 655px;
+    left: 552px;
+    font-size: 32px;
+    font-weight: 800;
+    color: #1e5d40;
+    display: inline-block;
+    width: 70px;
+    height: 47px;
+    flex-shrink: 0;
+}
+.div3 {
+    position: absolute;
+    top: 655px;
+    left: 751px;
+    font-size: 32px;
+    font-weight: 800;
+    color: #1e5d40;
+    display: inline-block;
+    width: 104px;
+    height: 47px;
+    flex-shrink: 0;
+}
+.div4 {
+    position: absolute;
+    top: 558px;
+    left: 1520px;
+    font-size: 40px;
+    font-weight: 800;
+    color: #23a873;
+    display: inline-block;
+    width: 108px;
+    height: 52px;
+    flex-shrink: 0;
+}
+.impacto-em-2025 {
+    position: absolute;
+    top: 530px;
+    left: 1387px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.8);
+    display: inline-block;
+    width: 198px;
+    height: 36px;
+    flex-shrink: 0;
+}
+.rectangle-icon {
+    position: absolute;
+    top: 264px;
+    left: 1364px;
+    border-radius: 20px;
+    width: 240px;
+    height: 243px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.somos-uma-plataforma {
+    position: absolute;
+    top: 968px;
+    left: 279px;
+    font-size: 16px;
+    font-weight: 300;
+    color: #000;
+    display: inline-block;
+    width: 586px;
+    height: 130px;
+    flex-shrink: 0;
+}
+.utilizamos-dados-em {
+    position: absolute;
+    top: 1185px;
+    left: 306px;
+    font-size: 16px;
+    font-weight: 300;
+    color: #000;
+    display: inline-block;
+    width: 456px;
+    height: 71px;
+    flex-shrink: 0;
+}
+.promovemos-prticas-agrcolas {
+    position: absolute;
+    top: 1380px;
+    left: 306px;
+    font-size: 16px;
+    font-weight: 300;
+    color: #000;
+    display: inline-block;
+    width: 456px;
+    height: 71px;
+    flex-shrink: 0;
+}
+.apoiamos-comunidades-rurais {
+    position: absolute;
+    top: 1582px;
+    left: 306px;
+    font-size: 16px;
+    font-weight: 300;
+    color: #000;
+    display: inline-block;
+    width: 456px;
+    height: 71px;
+    flex-shrink: 0;
+}
+.sistema-automatizado-que-container {
+    position: absolute;
+    top: 1985px;
+    left: 1100px;
+    font-size: 24px;
+    font-weight: 300;
+    color: #000;
+    display: inline-block;
+    width: 581px;
+    height: 394px;
+    flex-shrink: 0;
+}
+.sistema-automatizado-que {
+    margin: 0;
+}
+.controle-de-estoque-entradas {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    padding-left: 32px;
+}
+.controle-de-estoque {
+    margin-bottom: 0px;
+}
+.oferece-visibilidade-total-container {
+    position: absolute;
+    top: 3023px;
+    left: 981px;
+    font-size: 24px;
+    font-weight: 300;
+    color: #000;
+    display: inline-block;
+    width: 735px;
+    height: 277px;
+    flex-shrink: 0;
+}
+.registros-do-impacto {
+    position: absolute;
+    top: 3483px;
+    left: 664px;
+    font-weight: 300;
+    color: #000;
+    display: inline-block;
+    width: 592px;
+    height: 50px;
+    flex-shrink: 0;
+}
+.juntos-construindo-o {
+    position: absolute;
+    top: 4004px;
+    left: 697px;
+    font-weight: 300;
+    color: #000;
+    display: inline-block;
+    width: 526px;
+    height: 51px;
+    flex-shrink: 0;
+}
+.utiliza-mtodos-estatsticos-container {
+    position: absolute;
+    top: 2488px;
+    left: 279px;
+    font-size: 24px;
+    font-weight: 300;
+    color: #000;
+    display: inline-block;
+    width: 662px;
+    height: 280px;
+    flex-shrink: 0;
+}
+.solues-integradas-para {
+    position: absolute;
+    top: 1842px;
+    left: 603px;
+    font-weight: 300;
+    color: #000;
+    display: inline-block;
+    width: 715px;
+    height: 72px;
+    flex-shrink: 0;
+}
+.home-child8 {
+    position: absolute;
+    top: 1126px;
+    left: 977px;
+    border-radius: 20px;
+    width: 664px;
+    height: 557px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.home-child9 {
+    position: absolute;
+    top: 1942px;
+    left: 279px;
+    border-radius: 20px;
+    width: 641px;
+    height: 358px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.home-child10 {
+    position: absolute;
+    top: 2449px;
+    left: 1000px;
+    border-radius: 20px;
+    width: 641px;
+    height: 358px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.home-child11 {
+    position: absolute;
+    top: 2956px;
+    left: 279px;
+    border-radius: 20px;
+    width: 641px;
+    height: 358px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.home-child12 {
+    position: absolute;
+    top: 3581px;
+    left: 279px;
+    border-radius: 20px;
+    width: 353px;
+    height: 235px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.home-child13 {
+    position: absolute;
+    top: 3581px;
+    left: 784px;
+    border-radius: 20px;
+    width: 353px;
+    height: 235px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.home-child14 {
+    position: absolute;
+    top: 3581px;
+    left: 1288px;
+    border-radius: 20px;
+    width: 353px;
+    height: 235px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.image-2-icon {
+    position: absolute;
+    top: 4070px;
+    left: 279px;
+    width: 162px;
+    height: 150px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.image-3-icon {
+    position: absolute;
+    top: 4070px;
+    left: 588px;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.image-4-icon {
+    position: absolute;
+    top: 4067px;
+    left: 885px;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.image-5-icon {
+    position: absolute;
+    top: 4070px;
+    left: 1182px;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.image-6-icon {
+    position: absolute;
+    top: 4070px;
+    left: 1479px;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.chatgpt-image-4-de-nov-de-202 {
+    position: absolute;
+    top: 10px;
+    left: 242px;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.inteligncia-no-campo {
+    position: absolute;
+    top: 1149px;
+    left: 306px;
+    font-weight: 600;
+    display: inline-block;
+    width: 241px;
+    height: 36px;
+    flex-shrink: 0;
+}
+.sustentabilidade-em-ao {
+    position: absolute;
+    top: 1344px;
+    left: 306px;
+    font-weight: 600;
+    display: inline-block;
+    width: 279px;
+    height: 36px;
+    flex-shrink: 0;
+}
+.impacto-social-mensurvel {
+    position: absolute;
+    top: 1539px;
+    left: 306px;
+    font-weight: 600;
+    display: inline-block;
+    width: 279px;
+    height: 36px;
+    flex-shrink: 0;
+}
+.home-child15 {
+    position: absolute;
+    top: 4408px;
+    left: 0px;
+    background-color: #0e4d30;
+    width: 1920px;
+    height: 549px;
+    flex-shrink: 0;
+}
+.gro-em-vida2 {
+    position: absolute;
+    top: 4488px;
+    left: 306px;
+    font-size: 24px;
+    display: inline-block;
+    color: #fff;
+    width: 173px;
+    height: 36px;
+    flex-shrink: 0;
+}
+.navegao {
+    position: absolute;
+    top: 4488px;
+    left: 882px;
+    font-size: 24px;
+    display: inline-block;
+    color: #fff;
+    width: 158px;
+    height: 36px;
+    flex-shrink: 0;
+}
+.contato2 {
+    position: absolute;
+    top: 4488px;
+    left: 1443px;
+    font-size: 24px;
+    display: inline-block;
+    color: #fff;
+    width: 159px;
+    height: 36px;
+    flex-shrink: 0;
+}
+.conecte-se {
+    position: absolute;
+    top: 4734px;
+    left: 307px;
+    font-size: 24px;
+    display: inline-block;
+    color: #fff;
+    width: 173px;
+    height: 36px;
+    flex-shrink: 0;
+}
+.tecnologia-e-inovao {
+    position: absolute;
+    top: 4542px;
+    left: 306px;
+    font-weight: 500;
+    color: #fff;
+    display: inline-block;
+    width: 439px;
+    height: 104px;
+    flex-shrink: 0;
+}
+.incio {
+    position: absolute;
+    top: 4542px;
+    left: 882px;
+    font-weight: 500;
+    color: #fff;
+    display: inline-block;
+    width: 58px;
+    height: 30px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.sobre2 {
+    position: absolute;
+    top: 4578px;
+    left: 882px;
+    font-weight: 500;
+    color: #fff;
+    display: inline-block;
+    width: 483px;
+    height: 30px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.projeto2 {
+    position: absolute;
+    top: 4616px;
+    left: 882px;
+    font-weight: 500;
+    color: #fff;
+    display: inline-block;
+    width: 87px;
+    height: 30px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.rua-das-inovaes {
+    position: absolute;
+    top: 4543px;
+    left: 1371px;
+    font-weight: 500;
+    color: #fff;
+    display: inline-block;
+    width: 240px;
+    height: 134px;
+    flex-shrink: 0;
+}
+.galeria2 {
+    position: absolute;
+    top: 4655px;
+    left: 882px;
+    font-weight: 500;
+    color: #fff;
+    display: inline-block;
+    width: 87px;
+    height: 30px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.facebook-icon {
+    position: absolute;
+    top: 4787px;
+    left: 376px;
+    width: 57px;
+    height: 57px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.google-icon {
+    position: absolute;
+    top: 4788px;
+    left: 446px;
+    width: 62px;
+    height: 54px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.instagram-logo-icon {
+    position: absolute;
+    top: 4786px;
+    left: 307px;
+    width: 57px;
+    height: 57px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.line-div {
+    position: absolute;
+    top: 4710.75px;
+    left: 332.75px;
+    border-top: 0.5px solid #fff;
+    box-sizing: border-box;
+    width: 1255.5px;
+    height: 0.5px;
+    flex-shrink: 0;
+}
+.entrar-wrapper {
+    position: absolute;
+    top: 42px;
+    left: 1554px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    background-color: #23a873;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    width: 130px;
+    height: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 39px;
+    flex-shrink: 0;
+    font-size: 16px;
+    color: #fff;
+}
+.entrar {
+    position: relative;
+    font-weight: 500;
+}
+
+/* Small helpful tweak so scaled text doesn't blur as much on some browsers */
+.home, .home * {
+    -webkit-font-smoothing: antialiased;
+    -webkit-transform-style: preserve-3d;
+}
+
+/* ---- RESPONSIVIDADE PARA TELAS < 1200px ---- */
+
+@media (max-width: 1200px) {
+
+    /* faz o layout inteiro diminuir proporcionalmente */
+    .home {
+        transform: scale( calc(100vw / 1920) );
+        transform-origin: top center;
+    }
+
+    /* ajusta altura do wrapper conforme o scale */
+    .viewport-wrapper {
+        height: calc(4954px * (100vw / 1920));
+        overflow: visible;
+    }
+}

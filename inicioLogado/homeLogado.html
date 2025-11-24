@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Grão em Vida</title>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" />
+
+    <style>
+        /* --- RESET GERAL --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ecfdf3; /* Fundo verde claro original */
+            color: #333;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- HEADER (Cabeçalho) --- */
+        header {
+            width: 100%;
+            height: 124px;
+            background-color: #f4fff8;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .header-left { display: flex; flex-direction: column; gap: 5px; }
+        .logo-text { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 800; color: #1e5d40; }
+        .slogan-text { font-family: 'Poppins', sans-serif; font-size: 14px; color: rgba(0, 0, 0, 0.5); }
+
+        .header-nav { display: flex; gap: 40px; align-items: center; }
+        .nav-link {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #1e5d40;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .nav-link:hover { opacity: 0.8; }
+
+        .header-right { display: flex; align-items: center; gap: 20px; }
+        .profile-icon {
+            width: 50px; height: 50px; border-radius: 50%;
+            background-color: #ccc; object-fit: cover;
+        }
+        .btn-sair { font-family: 'Poppins', sans-serif; font-weight: 600; color: #1e5d40; cursor: pointer; }
+
+        /* --- CONTEÚDO PRINCIPAL --- */
+        .main-container {
+            width: 100%;
+            max-width: 1300px; /* Limita a largura em telas gigantes */
+            margin: 0 auto;
+            padding: 40px 20px;
+            flex: 1;
+        }
+
+        .page-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 55px;
+            font-weight: 600;
+            color: #345391;
+            margin-bottom: 40px;
+            margin-left: 20px; /* Alinhamento visual com os cards */
+        }
+
+        /* --- LISTA DE CARDS --- */
+        .card-list {
+            display: flex;
+            flex-direction: column;
+            gap: 40px; /* Espaço entre os cards */
+        }
+
+        .card-item {
+            background-color: #fff;
+            border: 1px solid #23a873; /* Borda verde original */
+            border-radius: 20px;
+            padding: 30px;
+            display: flex; /* Alinha Imagem - Texto - Botão */
+            align-items: center;
+            gap: 40px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .card-item:hover {
+            transform: translateY(-5px); /* Efeito leve ao passar o mouse */
+        }
+
+        .card-image {
+            width: 260px;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 20px;
+            flex-shrink: 0; /* Impede a imagem de esmagar */
+            background-color: #eee; /* Cor de fundo caso imagem falhe */
+        }
+
+        .card-content {
+            flex: 1; /* Ocupa o espaço disponível no meio */
+        }
+
+        .card-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: #1d73f3; /* Azul original */
+            text-decoration: underline;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            line-height: 1.5;
+            color: #19191a;
+            text-align: justify;
+        }
+
+        .card-button {
+            background-color: #23a873; /* Verde do botão */
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 10px 40px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            white-space: nowrap; /* Não quebra linha no botão */
+            transition: background 0.3s;
+        }
+
+        .card-button:hover {
+            background-color: #1b8a5e;
+        }
+
+        /* Responsividade para Tablets/Celulares */
+        @media (max-width: 1024px) {
+            .card-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 20px;
+            }
+            .card-description { text-align: center; }
+            .header-nav { display: none; } /* Esconder menu simples em telas pequenas */
+            header { justify-content: center; flex-direction: column; gap: 15px; height: auto; padding: 20px;}
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #0e4d30;
+            color: #fff;
+            padding: 60px 5%;
+            margin-top: 60px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-col h3 { font-size: 20px; margin-bottom: 20px; font-weight: 600; }
+        .footer-col p, .footer-col a {
+            font-size: 16px; color: #fff; text-decoration: none;
+            display: block; margin-bottom: 10px; opacity: 0.9;
+        }
+        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-box { width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 5px; display: flex; align-items: center; justify-content: center;}
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="logo-text">Grão em vida</div>
+            <div class="slogan-text">Agro • Transparência • Inovação</div>
+        </div>
+
+        <nav class="header-nav">
+            <a class="nav-link">Início</a>
+            <a class="nav-link">Sobre</a>
+            <a class="nav-link">Projeto</a>
+            <a class="nav-link">Galeria</a>
+            <a class="nav-link">Contato</a>
+        </nav>
+
+        <div class="header-right">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Perfil" class="profile-icon">
+            <div class="btn-sair">Sair</div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <h1 class="page-title">Home</h1>
+
+        <div class="card-list">
+            
+            <div class="card-item">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1000&auto=format&fit=crop" class="card-image" alt="Gestão">
+                
+                <div class="card-content">
+                    <span class="card-title">Gestão</span>
+                    <p class="card-description">
+                        A Gestão IPA busca excelência e inovação em todos os processos, unindo conhecimento e prática para formar profissionais competentes e éticos. Com foco na eficiência, responsabilidade social e desenvolvimento sustentável, o IPA prepara líderes capazes de transformar realidades e gerar impacto positivo na sociedade.
+                    </p>
+                </div>
+                
+                <button class="card-button" onclick="alert('Acessar Gestão')">Acessar</button>
+            </div>
+
+            <div class="card-item">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop" class="card-image" alt="Controle">
+                
+                <div class="card-content">
+                    <span class="card-title" style="color: #345391; text-decoration: none;">Controle</span> <p class="card-description">
+                        O Controle no IPA busca assegurar eficiência, transparência e responsabilidade em todas as ações institucionais. Por meio do acompanhamento e da avaliação contínua dos processos, garante-se o uso adequado dos recursos e a melhoria constante dos resultados, fortalecendo a gestão e a tomada de decisões.
+                    </p>
+                </div>
+                
+                <button class="card-button">Acessar</button>
+            </div>
+
+            <div class="card-item">
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1000&auto=format&fit=crop" class="card-image" alt="Logística">
+                
+                <div class="card-content">
+                    <span class="card-title">Logística</span>
+                    <p class="card-description">
+                        A Logística no IPA tem como foco o planejamento, a organização e o controle do fluxo de materiais, informações e serviços. Busca-se otimizar recursos, reduzir custos e garantir eficiência nas operações, contribuindo para uma gestão integrada e sustentável.
+                    </p>
+                </div>
+                
+                <button class="card-button">Acessar</button>
+            </div>
+
+            <div class="card-item">
+                <img src="https://images.unsplash.com/photo-1566576912906-253c72354d6a?q=80&w=1000&auto=format&fit=crop" class="card-image" alt="Rastreio">
+                
+                <div class="card-content">
+                    <span class="card-title">Rastreio</span>
+                    <p class="card-description">
+                        O Rastreio no IPA tem como objetivo acompanhar e monitorar o percurso de produtos e informações ao longo da cadeia logística. Essa prática garante transparência, segurança e eficiência nas operações, permitindo maior controle dos processos e melhor tomada de decisões.
+                    </p>
+                </div>
+                
+                <button class="card-button">Acessar</button>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Grão em vida</h3>
+                <p>Tecnologia e inovação para transformar a agricultura familiar.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Navegação</h3>
+                <a href="#">Início</a>
+                <a href="#">Sobre</a>
+                <a href="#">Projeto</a>
+                <a href="#">Galeria</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <p>Rua das Inovações, 123</p>
+                <p>Bezerros, PE - Brasil</p>
+                <p>+55 (81) 99999-9999</p>
+            </div>
+            <div class="footer-col">
+                <h3>Conecte-se</h3>
+                <div class="social-icons">
+                    <div class="social-box">FB</div>
+                    <div class="social-box">IG</div>
+                    <div class="social-box">GL</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
