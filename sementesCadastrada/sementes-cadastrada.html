@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lista de sementes cadastradas - Sistema Grão em Vida">
+    <title>Sementes Cadastradas - Grão em Vida</title>
+    
+    <!-- Fontes e Ícones -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <style>
+        /* --- VARIÁVEIS CSS --- */
+        :root {
+            /* Cores principais */
+            --primary-dark: #0e4d30;
+            --primary: #1e5d40;
+            --primary-light: #23a873;
+            --primary-extra-light: #d6fae5;
+            --primary-bg: #f8fffb;
+            
+            /* Cores de status */
+            --status-active: #28a745;
+            --status-pending: #ffc107;
+            --status-inactive: #6c757d;
+            --status-warning: #fd7e14;
+            
+            /* Cores de categorias */
+            --category-grain: #3498db;
+            --category-legume: #9b59b6;
+            --category-vegetable: #2ecc71;
+            --category-fruit: #e74c3c;
+            --category-other: #f39c12;
+            
+            /* Cores neutras */
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --border-gray: #dee2e6;
+            --text-light: #6c757d;
+            --text-dark: #212529;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            
+            /* Espaçamentos */
+            --spacing-xs: 8px;
+            --spacing-sm: 12px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-xxl: 48px;
+            
+            /* Bordas */
+            --border-radius-sm: 6px;
+            --border-radius: 10px;
+            --border-radius-lg: 16px;
+            --border-radius-xl: 20px;
+            
+            /* Sombras */
+            --shadow-sm: 0 2px 4px var(--shadow-color);
+            --shadow-md: 0 4px 12px var(--shadow-color);
+            --shadow-lg: 0 8px 24px var(--shadow-color);
+            
+            /* Tipografia */
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+        
+        /* --- RESET E ESTILOS BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            background-color: var(--primary-bg);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* --- LAYOUT PRINCIPAL --- */
+        .page-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* --- HEADER --- */
+        .main-header {
+            background-color: var(--white);
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-md) var(--spacing-xl);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-lg);
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+        
+        .logo-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        .main-nav {
+            display: flex;
+            gap: var(--spacing-xl);
+        }
+        
+        .nav-link {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 1rem;
+            position: relative;
+            padding: var(--spacing-xs) 0;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-light);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-light);
+        }
+        
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-light);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+        
+        /* --- CONTEÚDO PRINCIPAL --- */
+        .main-content {
+            flex: 1;
+            padding: var(--spacing-xl);
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        /* Cabeçalho da página */
+        .page-header {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .page-title {
+            font-family: var(--font-heading);
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 800px;
+        }
+        
+        /* --- CONTROLES DA LISTA --- */
+        .list-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+            padding: var(--spacing-lg);
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .search-container {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: var(--spacing-md) var(--spacing-lg) var(--spacing-md) 50px;
+            border: 2px solid var(--border-gray);
+            border-radius: var(--border-radius);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(35, 168, 115, 0.2);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: var(--spacing-lg);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        
+        .filters-container {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+        
+        .filter-select {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 2px solid var(--border-gray);
+            border-radius: var(--border-radius);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            background-color: var(--white);
+            color: var(--text-dark);
+            cursor: pointer;
+            min-width: 160px;
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary-light);
+        }
+        
+        .actions-container {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        .btn {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--border-radius);
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-xs);
+            border: 2px solid transparent;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--primary-extra-light);
+        }
+        
+        .btn-icon {
+            font-size: 0.9em;
+        }
+        
+        /* --- ESTATÍSTICAS --- */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .stat-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+        
+        .stat-icon.total { background-color: var(--primary); }
+        .stat-icon.active { background-color: var(--status-active); }
+        .stat-icon.pending { background-color: var(--status-pending); }
+        .stat-icon.storage { background-color: var(--category-grain); }
+        
+        .stat-content {
+            flex: 1;
+        }
+        
+        .stat-value {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+        
+        /* --- LISTA DE SEMENTES --- */
+        .seeds-list-container {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+        
+        .list-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 0.5fr;
+            gap: var(--spacing-md);
+            padding: var(--spacing-lg);
+            background-color: var(--primary-extra-light);
+            border-bottom: 1px solid var(--border-gray);
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--primary-dark);
+            font-size: 0.95rem;
+        }
+        
+        .list-header-cell {
+            padding: var(--spacing-xs);
+        }
+        
+        .list-body {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        /* Scrollbar personalizada */
+        .list-body::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .list-body::-webkit-scrollbar-track {
+            background: var(--light-gray);
+        }
+        
+        .list-body::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 4px;
+        }
+        
+        .list-body::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+        
+        /* Item da lista */
+        .seed-item {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr 0.5fr;
+            gap: var(--spacing-md);
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--border-gray);
+            transition: background-color 0.3s ease;
+            align-items: center;
+        }
+        
+        .seed-item:hover {
+            background-color: var(--light-gray);
+        }
+        
+        .seed-item:last-child {
+            border-bottom: none;
+        }
+        
+        .seed-cell {
+            padding: var(--spacing-xs);
+        }
+        
+        /* Informações da semente */
+        .seed-info {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        .seed-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--white);
+        }
+        
+        .seed-icon.grain { background-color: var(--category-grain); }
+        .seed-icon.legume { background-color: var(--category-legume); }
+        .seed-icon.vegetable { background-color: var(--category-vegetable); }
+        .seed-icon.fruit { background-color: var(--category-fruit); }
+        .seed-icon.other { background-color: var(--category-other); }
+        
+        .seed-details h4 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            color: var(--text-dark);
+        }
+        
+        .seed-details p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .seed-code {
+            font-family: 'Courier New', monospace;
+            background-color: var(--light-gray);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+        
+        /* Status */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .status-active { background-color: rgba(40, 167, 69, 0.15); color: var(--status-active); }
+        .status-pending { background-color: rgba(255, 193, 7, 0.15); color: var(--status-pending); }
+        .status-inactive { background-color: rgba(108, 117, 125, 0.15); color: var(--status-inactive); }
+        .status-warning { background-color: rgba(253, 126, 20, 0.15); color: var(--status-warning); }
+        
+        /* Data formatada */
+        .date-cell {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+        }
+        
+        .date-day {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .date-month {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Ações */
+        .action-buttons {
+            display: flex;
+            gap: var(--spacing-xs);
+        }
+        
+        .action-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            border: 1px solid var(--border-gray);
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            background-color: var(--primary-extra-light);
+            color: var(--primary);
+            border-color: var(--primary-light);
+            transform: translateY(-2px);
+        }
+        
+        /* --- PAGINAÇÃO --- */
+        .pagination-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-lg);
+            background-color: var(--white);
+            border-top: 1px solid var(--border-gray);
+        }
+        
+        .pagination-info {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+        
+        .pagination-controls {
+            display: flex;
+            gap: var(--spacing-xs);
+        }
+        
+        .pagination-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light-gray);
+            border: 1px solid var(--border-gray);
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .pagination-btn:hover:not(:disabled) {
+            background-color: var(--primary-extra-light);
+            border-color: var(--primary-light);
+            color: var(--primary);
+        }
+        
+        .pagination-btn.active {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        /* --- FOOTER --- */
+        .main-footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            padding: var(--spacing-xxl) var(--spacing-xl) var(--spacing-lg);
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-xl);
+        }
+        
+        .footer-section h3 {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+            padding-bottom: var(--spacing-sm);
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-light);
+        }
+        
+        .footer-section p, .footer-section a {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: var(--spacing-sm);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: var(--white);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            max-width: 1400px;
+            margin: var(--spacing-xl) auto 0;
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* --- MODAL DE DETALHES --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: var(--white);
+            border-radius: var(--border-radius-lg);
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            padding: var(--spacing-lg) var(--spacing-xl);
+            background-color: var(--primary);
+            color: var(--white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .modal-body {
+            padding: var(--spacing-xl);
+        }
+        
+        .seed-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-lg);
+        }
+        
+        .detail-group {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .detail-label {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: var(--spacing-xs);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+        
+        .detail-value {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            padding: var(--spacing-sm) 0;
+            border-bottom: 1px solid var(--border-gray);
+        }
+        
+        .detail-full {
+            grid-column: 1 / -1;
+        }
+        
+        .modal-footer {
+            padding: var(--spacing-lg) var(--spacing-xl);
+            background-color: var(--light-gray);
+            border-top: 1px solid var(--border-gray);
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--spacing-md);
+        }
+        
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 1200px) {
+            .list-header,
+            .seed-item {
+                grid-template-columns: 2fr 1fr 1fr 1fr 0.8fr;
+            }
+            
+            .list-header-cell:nth-child(6),
+            .seed-cell:nth-child(6) {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .seed-detail-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-header {
+                padding: var(--spacing-md);
+            }
+            
+            .main-nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: var(--spacing-lg);
+                box-shadow: var(--shadow-md);
+                z-index: 99;
+            }
+            
+            .main-nav.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .main-content {
+                padding: var(--spacing-lg);
+            }
+            
+            .list-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-container {
+                min-width: 100%;
+            }
+            
+            .list-header,
+            .seed-item {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--spacing-sm);
+            }
+            
+            .list-header-cell:nth-child(3),
+            .list-header-cell:nth-child(4),
+            .list-header-cell:nth-child(5),
+            .seed-cell:nth-child(3),
+            .seed-cell:nth-child(4),
+            .seed-cell:nth-child(5) {
+                display: none;
+            }
+            
+            .seed-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-sm);
+            }
+            
+            .pagination-container {
+                flex-direction: column;
+                gap: var(--spacing-md);
+                text-align: center;
+            }
+            
+            .modal {
+                width: 95%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-title {
+                font-size: 1.75rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-section {
+                text-align: center;
+            }
+            
+            .footer-section h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+        
+        /* --- ANIMAÇÕES --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        /* --- UTILITÁRIOS --- */
+        .hidden {
+            display: none !important;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .text-right {
+            text-align: right;
+        }
+        
+        .mt-1 { margin-top: var(--spacing-sm); }
+        .mt-2 { margin-top: var(--spacing-md); }
+        .mt-3 { margin-top: var(--spacing-lg); }
+        .mt-4 { margin-top: var(--spacing-xl); }
+        
+        .mb-1 { margin-bottom: var(--spacing-sm); }
+        .mb-2 { margin-bottom: var(--spacing-md); }
+        .mb-3 { margin-bottom: var(--spacing-lg); }
+        .mb-4 { margin-bottom: var(--spacing-xl); }
+        
+        /* --- ESTADO VAZIO --- */
+        .empty-state {
+            padding: var(--spacing-xxl) var(--spacing-xl);
+            text-align: center;
+            color: var(--text-light);
+        }
+        
+        .empty-state i {
+            font-size: 4rem;
+            color: var(--medium-gray);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .empty-state h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--text-dark);
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <!-- Cabeçalho -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="../images/logo.png" alt="Logo Grão em Vida" class="logo-img">
+                    <div>
+                        <h1 class="logo-text">Grão em Vida</h1>
+                        <p class="logo-subtitle">Agro • Transparência • Inovação</p>
+                    </div>
+                </div>
+                
+                <!-- Menu Mobile -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <!-- Navegação -->
+                <nav class="main-nav" id="mainNav">
+                    <a href="/inicioLogado/homeLogado.html" class="nav-link">Início</a>
+                    <a href="/cadastroSeme/cadastroS.html" class="nav-link">Cadastrar Sementes</a>
+                    <a href="#" class="nav-link active">Sementes Cadastradas</a>
+                    <a href="#" class="nav-link">Relatórios</a>
+                    <a href="#" class="nav-link">Configurações</a>
+                </nav>
+                
+                <!-- Perfil do usuário -->
+                <div class="user-section">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Foto do perfil" class="user-avatar">
+                    <span class="user-name">Agricultor</span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Conteúdo principal -->
+        <main class="main-content">
+            <!-- Cabeçalho da página -->
+            <div class="page-header">
+                <h1 class="page-title">Sementes Cadastradas</h1>
+                <p class="page-subtitle">
+                    Visualize e gerencie todas as sementes registradas no sistema. 
+                    Utilize os filtros para encontrar informações específicas.
+                </p>
+            </div>
+            
+            <!-- Estatísticas -->
+            <div class="stats-container">
+                <div class="stat-card fade-in" style="animation-delay: 0.1s;">
+                    <div class="stat-icon total">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="totalSeeds">187</div>
+                        <div class="stat-label">Total de Sementes</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card fade-in" style="animation-delay: 0.2s;">
+                    <div class="stat-icon active">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="activeSeeds">156</div>
+                        <div class="stat-label">Sementes Ativas</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card fade-in" style="animation-delay: 0.3s;">
+                    <div class="stat-icon pending">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="pendingSeeds">18</div>
+                        <div class="stat-label">Pendentes de Análise</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card fade-in" style="animation-delay: 0.4s;">
+                    <div class="stat-icon storage">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-value" id="storageLocations">12</div>
+                        <div class="stat-label">Locais de Armazenamento</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Controles da lista -->
+            <div class="list-controls">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Buscar por nome, código ou fornecedor...">
+                </div>
+                
+                <div class="filters-container">
+                    <select class="filter-select" id="typeFilter">
+                        <option value="">Todos os Tipos</option>
+                        <option value="grain">Grãos</option>
+                        <option value="legume">Legumes</option>
+                        <option value="vegetable">Hortaliças</option>
+                        <option value="fruit">Frutas</option>
+                        <option value="other">Outros</option>
+                    </select>
+                    
+                    <select class="filter-select" id="statusFilter">
+                        <option value="">Todos os Status</option>
+                        <option value="active">Ativo</option>
+                        <option value="pending">Pendente</option>
+                        <option value="inactive">Inativo</option>
+                        <option value="warning">Atenção</option>
+                    </select>
+                </div>
+                
+                <div class="actions-container">
+                    <a href="/cadastroSeme/cadastroS.html" class="btn btn-primary">
+                        <i class="fas fa-plus btn-icon"></i> Nova Semente
+                    </a>
+                    <button class="btn btn-secondary" id="exportBtn">
+                        <i class="fas fa-download btn-icon"></i> Exportar
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Lista de sementes -->
+            <div class="seeds-list-container">
+                <!-- Cabeçalho da tabela -->
+                <div class="list-header">
+                    <div class="list-header-cell">Semente</div>
+                    <div class="list-header-cell">Tipo</div>
+                    <div class="list-header-cell">Status</div>
+                    <div class="list-header-cell">Data de Aquisição</div>
+                    <div class="list-header-cell">Localização</div>
+                    <div class="list-header-cell text-center">Ações</div>
+                </div>
+                
+                <!-- Corpo da tabela -->
+                <div class="list-body" id="seedsList">
+                    <!-- Os itens serão inseridos aqui via JavaScript -->
+                </div>
+                
+                <!-- Estado vazio (será mostrado se não houver resultados) -->
+                <div class="empty-state hidden" id="emptyState">
+                    <i class="fas fa-inbox"></i>
+                    <h3>Nenhuma semente encontrada</h3>
+                    <p>Não há sementes correspondentes aos filtros aplicados.</p>
+                    <button class="btn btn-primary mt-3" id="clearFiltersBtn">
+                        <i class="fas fa-filter btn-icon"></i> Limpar Filtros
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Paginação -->
+            <div class="pagination-container">
+                <div class="pagination-info">
+                    Mostrando <span id="currentRange">1-10</span> de <span id="totalItems">187</span> sementes
+                </div>
+                
+                <div class="pagination-controls">
+                    <button class="pagination-btn" id="prevPage" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <button class="pagination-btn active">1</button>
+                    <button class="pagination-btn">2</button>
+                    <button class="pagination-btn">3</button>
+                    <button class="pagination-btn">4</button>
+                    <span>...</span>
+                    <button class="pagination-btn">19</button>
+                    
+                    <button class="pagination-btn" id="nextPage">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Rodapé -->
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Grão em Vida</h3>
+                    <p>Tecnologia e inovação para transformar a agricultura familiar. Promovendo transparência, eficiência e impacto social real.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Navegação</h3>
+                    <a href="/inicioLogado/homeLogado.html">Início</a>
+                    <a href="/cadastroSeme/cadastroS.html">Cadastro de Sementes</a>
+                    <a href="#">Sementes Cadastradas</a>
+                    <a href="#">Relatórios</a>
+                    <a href="#">Configurações</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Rua das Inovações, 123 - Bezerros, PE</p>
+                    <p><i class="fas fa-envelope"></i> contato@gv.org.br</p>
+                    <p><i class="fas fa-phone"></i> (81) 99999-9999</p>
+                    <p><i class="fas fa-clock"></i> Seg-Sex: 8h às 17h</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Conecte-se</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                    <p>Nos siga nas redes sociais para acompanhar nossas iniciativas.</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Grão em Vida. Todos os direitos reservados. | Desenvolvido com <i class="fas fa-heart" style="color: #ff6b6b;"></i> para a agricultura familiar</p>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Modal de detalhes -->
+    <div class="modal-overlay" id="seedDetailModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Detalhes da Semente</h3>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="seed-detail-grid">
+                    <div class="detail-group">
+                        <div class="detail-label">
+                            <i class="fas fa-seedling"></i> Nome da Semente
+                        </div>
+                        <div class="detail-value" id="detailName">-</div>
+                    </div>
+                    
+                    <div class="detail-group">
+                        <div class="detail-label">
+                            <i class="fas fa-tag"></i> Código
+                        </div>
+                        <div class="detail-value" id="detailCode">-</div>
+                    </div>
+                    
+                    <div class="detail-group">
+                        <div class="detail-label">
+                            <i class="fas fa-layer-group"></i> Tipo
+                        </div>
+                        <div class="detail-value" id="detailType">-</div>
+                    </div>
+                    
+                    <div class="detail-group">
+                        <div class="detail-label">
+                            <i class="fas fa-certificate"></i> Status
+                        </div>
+                        <div class="detail-value" id="detailStatus">-</div>
+                    </div>
+                    
+                    <div class="detail-group">
+                        <div class="detail-label">
+                            <i class="fas fa-calendar-alt"></i> Data de Aquisição
+                        </div>
+                        <div class="detail-value" id="detailAcquisitionDate">-</div>
+                    </div>
+                    
+                    <div class="detail-group">
+                        <div class="detail-label">
+                            <i class="fas fa-weight"></i> Quantidade
+                        </div>
+                        <div class="detail-value" id="detailQuantity">-</div>
+                    </div>
+                    
+                    <div class="detail-group">
+                        <div class="detail-label">
+                            <i class="fas fa-truck"></i> Fornecedor
+                        </div>
+                        <div class="detail-value" id="detailSupplier">-</div>
+                    </div>
+                    
+                    <div class="detail-group">
+                        <div class="detail-label">
+                            <i class="fas fa-warehouse"></i> Armazém
+                        </div>
+                        <div class="detail-value" id="detailWarehouse">-</div>
+                    </div>
+                    
+                    <div class="detail-group">
+                        <div class="detail-label">
+                            <i class="fas fa-user"></i> Agricultor Responsável
+                        </div>
+                        <div class="detail-value" id="detailFarmer">-</div>
+                    </div>
+                    
+                    <div class="detail-group">
+                        <div class="detail-label">
+                            <i class="fas fa-map-marker-alt"></i> Município
+                        </div>
+                        <div class="detail-value" id="detailMunicipality">-</div>
+                    </div>
+                    
+                    <div class="detail-group detail-full">
+                        <div class="detail-label">
+                            <i class="fas fa-sticky-note"></i> Observações
+                        </div>
+                        <div class="detail-value" id="detailObservations">Nenhuma observação registrada.</div>
+                    </div>
+                    
+                    <div class="detail-group detail-full">
+                        <div class="detail-label">
+                            <i class="fas fa-history"></i> Histórico
+                        </div>
+                        <div class="detail-value" id="detailHistory">
+                            <div style="padding: var(--spacing-sm) 0;">
+                                <div><strong>Cadastro:</strong> 15/03/2024 - Por: Sistema</div>
+                                <div><strong>Última Atualização:</strong> 20/03/2024 - Por: João Silva</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="editSeedBtn">
+                    <i class="fas fa-edit btn-icon"></i> Editar
+                </button>
+                <button class="btn btn-primary" id="closeModalBtn">
+                    <i class="fas fa-times btn-icon"></i> Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Dados de exemplo para as sementes
+        const seedsData = [
+            {
+                id: 1,
+                name: "Milho Crioulo Amarelo",
+                code: "MILHO-001",
+                type: "grain",
+                typeName: "Grão",
+                status: "active",
+                statusName: "Ativo",
+                acquisitionDate: "2024-03-15",
+                quantity: "50 kg",
+                supplier: "Fazenda São João",
+                warehouse: "Armazém Central",
+                farmer: "João Silva",
+                municipality: "Bezerros",
+                observations: "Semente de alta qualidade, adaptada ao clima local.",
+                icon: "fas fa-wheat-alt"
+            },
+            {
+                id: 2,
+                name: "Feijão Carioca",
+                code: "FEIJAO-045",
+                type: "legume",
+                typeName: "Legume",
+                status: "active",
+                statusName: "Ativo",
+                acquisitionDate: "2024-03-10",
+                quantity: "30 kg",
+                supplier: "Cooperativa Agrícola",
+                warehouse: "Depósito Norte",
+                farmer: "Maria Santos",
+                municipality: "Caruaru",
+                observations: "Produto orgânico, sem agrotóxicos.",
+                icon: "fas fa-leaf"
+            },
+            {
+                id: 3,
+                name: "Arroz Agulhinha",
+                code: "ARROZ-023",
+                type: "grain",
+                typeName: "Grão",
+                status: "pending",
+                statusName: "Pendente",
+                acquisitionDate: "2024-03-18",
+                quantity: "100 kg",
+                supplier: "Armazém do Campo",
+                warehouse: "Silo Principal",
+                farmer: "Pedro Oliveira",
+                municipality: "Recife",
+                observations: "Aguardando análise de qualidade.",
+                icon: "fas fa-wheat-alt"
+            },
+            {
+                id: 4,
+                name: "Tomate Cereja",
+                code: "TOMATE-012",
+                type: "vegetable",
+                typeName: "Hortaliça",
+                status: "warning",
+                statusName: "Atenção",
+                acquisitionDate: "2024-02-28",
+                quantity: "5 kg",
+                supplier: "Horta Comunitária",
+                warehouse: "Estufa Sul",
+                farmer: "Ana Costa",
+                municipality: "Garanhuns",
+                observations: "Validade próxima do vencimento.",
+                icon: "fas fa-carrot"
+            },
+            {
+                id: 5,
+                name: "Abóbora Japonesa",
+                code: "ABOBORA-007",
+                type: "vegetable",
+                typeName: "Hortaliça",
+                status: "active",
+                statusName: "Ativo",
+                acquisitionDate: "2024-03-05",
+                quantity: "20 kg",
+                supplier: "Sítio Esperança",
+                warehouse: "Galpão Leste",
+                farmer: "Carlos Mendes",
+                municipality: "Bezerros",
+                observations: "Semente de polinização aberta.",
+                icon: "fas fa-carrot"
+            },
+            {
+                id: 6,
+                name: "Maracujá Azedo",
+                code: "MARACUJA-003",
+                type: "fruit",
+                typeName: "Fruta",
+                status: "inactive",
+                statusName: "Inativo",
+                acquisitionDate: "2023-12-10",
+                quantity: "2 kg",
+                supplier: "Frutaria do Vale",
+                warehouse: "Câmara Fria",
+                farmer: "Fernanda Lima",
+                municipality: "Pesqueira",
+                observations: "Semente em processo de descarte.",
+                icon: "fas fa-apple-alt"
+            },
+            {
+                id: 7,
+                name: "Soja Transgênica",
+                code: "SOJA-089",
+                type: "grain",
+                typeName: "Grão",
+                status: "active",
+                statusName: "Ativo",
+                acquisitionDate: "2024-02-15",
+                quantity: "200 kg",
+                supplier: "Agropecuária Moderna",
+                warehouse: "Silo Industrial",
+                farmer: "Roberto Alves",
+                municipality: "Caruaru",
+                observations: "Variedade resistente a pragas.",
+                icon: "fas fa-wheat-alt"
+            },
+            {
+                id: 8,
+                name: "Cenoura Brasileira",
+                code: "CENOURA-031",
+                type: "vegetable",
+                typeName: "Hortaliça",
+                status: "active",
+                statusName: "Ativo",
+                acquisitionDate: "2024-03-12",
+                quantity: "15 kg",
+                supplier: "Horta Familiar",
+                warehouse: "Depósito Oeste",
+                farmer: "Sandra Rocha",
+                municipality: "Bezerros",
+                observations: "Produção local, colheita manual.",
+                icon: "fas fa-carrot"
+            },
+            {
+                id: 9,
+                name: "Melancia Crimson",
+                code: "MELANCIA-005",
+                type: "fruit",
+                typeName: "Fruta",
+                status: "pending",
+                statusName: "Pendente",
+                acquisitionDate: "2024-03-20",
+                quantity: "10 kg",
+                supplier: "Sítio Doce Fruta",
+                warehouse: "Estufa Norte",
+                farmer: "Lucas Pereira",
+                municipality: "Recife",
+                observations: "Aguardando certificação orgânica.",
+                icon: "fas fa-apple-alt"
+            },
+            {
+                id: 10,
+                name: "Quinoa Real",
+                code: "QUINOA-002",
+                type: "other",
+                typeName: "Outro",
+                status: "active",
+                statusName: "Ativo",
+                acquisitionDate: "2024-03-08",
+                quantity: "25 kg",
+                supplier: "Produtos Andinos",
+                warehouse: "Armazém Especial",
+                farmer: "Paula Souza",
+                municipality: "Garanhuns",
+                observations: "Grão importado, alto valor nutricional.",
+                icon: "fas fa-seedling"
+            }
+        ];
+        
+        // Configurações da página
+        const ITEMS_PER_PAGE = 5;
+        let currentPage = 1;
+        let filteredSeeds = [...seedsData];
+        
+        // Elementos DOM
+        const seedsList = document.getElementById('seedsList');
+        const searchInput = document.getElementById('searchInput');
+        const typeFilter = document.getElementById('typeFilter');
+        const statusFilter = document.getElementById('statusFilter');
+        const emptyState = document.getElementById('emptyState');
+        const clearFiltersBtn = document.getElementById('clearFiltersBtn');
+        const modalOverlay = document.getElementById('seedDetailModal');
+        const modalClose = document.getElementById('modalClose');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const editSeedBtn = document.getElementById('editSeedBtn');
+        const exportBtn = document.getElementById('exportBtn');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        // Função para formatar data
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+        
+        // Função para obter ícone por tipo
+        function getTypeIcon(type) {
+            switch(type) {
+                case 'grain': return 'fas fa-wheat-alt';
+                case 'legume': return 'fas fa-leaf';
+                case 'vegetable': return 'fas fa-carrot';
+                case 'fruit': return 'fas fa-apple-alt';
+                default: return 'fas fa-seedling';
+            }
+        }
+        
+        // Função para obter classe CSS por tipo
+        function getTypeClass(type) {
+            switch(type) {
+                case 'grain': return 'grain';
+                case 'legume': return 'legume';
+                case 'vegetable': return 'vegetable';
+                case 'fruit': return 'fruit';
+                default: return 'other';
+            }
+        }
+        
+        // Função para obter classe CSS por status
+        function getStatusClass(status) {
+            switch(status) {
+                case 'active': return 'status-active';
+                case 'pending': return 'status-pending';
+                case 'inactive': return 'status-inactive';
+                case 'warning': return 'status-warning';
+                default: return 'status-inactive';
+            }
+        }
+        
+        // Função para renderizar um item da lista
+        function renderSeedItem(seed) {
+            const formattedDate = formatDate(seed.acquisitionDate);
+            const typeClass = getTypeClass(seed.type);
+            const statusClass = getStatusClass(seed.status);
+            const typeIcon = getTypeIcon(seed.type);
+            
+            return `
+                <div class="seed-item fade-in" data-id="${seed.id}">
+                    <div class="seed-cell">
+                        <div class="seed-info">
+                            <div class="seed-icon ${typeClass}">
+                                <i class="${typeIcon}"></i>
+                            </div>
+                            <div class="seed-details">
+                                <h4>${seed.name}</h4>
+                                <p class="seed-code">${seed.code}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="seed-cell">
+                        <span>${seed.typeName}</span>
+                    </div>
+                    
+                    <div class="seed-cell">
+                        <span class="status-badge ${statusClass}">${seed.statusName}</span>
+                    </div>
+                    
+                    <div class="seed-cell">
+                        <div class="date-cell">
+                            <div class="date-day">${formattedDate.split('/')[0]}/${formattedDate.split('/')[1]}</div>
+                            <div class="date-month">${formattedDate.split('/')[2]}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="seed-cell">
+                        <span>${seed.municipality}</span>
+                    </div>
+                    
+                    <div class="seed-cell">
+                        <div class="action-buttons">
+                            <button class="action-btn view-btn" title="Visualizar detalhes" data-id="${seed.id}">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="action-btn edit-btn" title="Editar semente" data-id="${seed.id}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Função para renderizar a lista completa
+        function renderSeedsList() {
+            // Calcular índices para paginação
+            const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+            const endIndex = startIndex + ITEMS_PER_PAGE;
+            const pageSeeds = filteredSeeds.slice(startIndex, endIndex);
+            
+            // Atualizar informações de paginação
+            document.getElementById('currentRange').textContent = 
+                `${startIndex + 1}-${Math.min(endIndex, filteredSeeds.length)}`;
+            document.getElementById('totalItems').textContent = filteredSeeds.length;
+            
+            // Atualizar estatísticas
+            updateStatistics();
+            
+            // Limpar lista atual
+            seedsList.innerHTML = '';
+            
+            // Verificar se há resultados
+            if (pageSeeds.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            
+            emptyState.classList.add('hidden');
+            
+            // Adicionar itens à lista
+            pageSeeds.forEach(seed => {
+                seedsList.innerHTML += renderSeedItem(seed);
+            });
+            
+            // Adicionar eventos aos botões de ação
+            addActionListeners();
+        }
+        
+        // Função para atualizar estatísticas
+        function updateStatistics() {
+            const total = seedsData.length;
+            const active = seedsData.filter(s => s.status === 'active').length;
+            const pending = seedsData.filter(s => s.status === 'pending').length;
+            
+            document.getElementById('totalSeeds').textContent = total;
+            document.getElementById('activeSeeds').textContent = active;
+            document.getElementById('pendingSeeds').textContent = pending;
+            document.getElementById('storageLocations').textContent = 
+                [...new Set(seedsData.map(s => s.warehouse))].length;
+        }
+        
+        // Função para filtrar sementes
+        function filterSeeds() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const typeValue = typeFilter.value;
+            const statusValue = statusFilter.value;
+            
+            filteredSeeds = seedsData.filter(seed => {
+                // Busca por texto
+                const matchesSearch = 
+                    seed.name.toLowerCase().includes(searchTerm) ||
+                    seed.code.toLowerCase().includes(searchTerm) ||
+                    seed.supplier.toLowerCase().includes(searchTerm);
+                
+                // Filtro por tipo
+                const matchesType = !typeValue || seed.type === typeValue;
+                
+                // Filtro por status
+                const matchesStatus = !statusValue || seed.status === statusValue;
+                
+                return matchesSearch && matchesType && matchesStatus;
+            });
+            
+            currentPage = 1;
+            renderSeedsList();
+            updatePagination();
+        }
+        
+        // Função para atualizar controles de paginação
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredSeeds.length / ITEMS_PER_PAGE);
+            const prevBtn = document.getElementById('prevPage');
+            const nextBtn = document.getElementById('nextPage');
+            
+            // Atualizar estado dos botões
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+            
+            // Atualizar números das páginas (simplificado)
+            // Em uma implementação completa, aqui seria renderizada a lista de páginas
+        }
+        
+        // Função para adicionar ouvintes de eventos aos botões de ação
+        function addActionListeners() {
+            // Botões de visualização
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const seedId = parseInt(this.getAttribute('data-id'));
+                    showSeedDetails(seedId);
+                });
+            });
+            
+            // Botões de edição
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const seedId = parseInt(this.getAttribute('data-id'));
+                    editSeed(seedId);
+                });
+            });
+        }
+        
+        // Função para mostrar detalhes da semente no modal
+        function showSeedDetails(seedId) {
+            const seed = seedsData.find(s => s.id === seedId);
+            if (!seed) return;
+            
+            // Preencher modal com dados
+            document.getElementById('modalTitle').textContent = seed.name;
+            document.getElementById('detailName').textContent = seed.name;
+            document.getElementById('detailCode').textContent = seed.code;
+            document.getElementById('detailType').textContent = seed.typeName;
+            document.getElementById('detailStatus').innerHTML = 
+                `<span class="status-badge ${getStatusClass(seed.status)}">${seed.statusName}</span>`;
+            document.getElementById('detailAcquisitionDate').textContent = formatDate(seed.acquisitionDate);
+            document.getElementById('detailQuantity').textContent = seed.quantity;
+            document.getElementById('detailSupplier').textContent = seed.supplier;
+            document.getElementById('detailWarehouse').textContent = seed.warehouse;
+            document.getElementById('detailFarmer').textContent = seed.farmer;
+            document.getElementById('detailMunicipality').textContent = seed.municipality;
+            document.getElementById('detailObservations').textContent = seed.observations;
+            
+            // Configurar botão de edição
+            editSeedBtn.onclick = () => editSeed(seedId);
+            
+            // Mostrar modal
+            modalOverlay.classList.add('active');
+        }
+        
+        // Função para editar semente
+        function editSeed(seedId) {
+            alert(`Redirecionando para edição da semente ID: ${seedId}`);
+            // Em uma implementação real, redirecionaria para a página de edição
+            // window.location.href = `/editar-semente.html?id=${seedId}`;
+        }
+        
+        // Função para limpar filtros
+        function clearFilters() {
+            searchInput.value = '';
+            typeFilter.value = '';
+            statusFilter.value = '';
+            filterSeeds();
+        }
+        
+        // Função para exportar dados
+        function exportData() {
+            alert('Exportando dados para CSV...');
+            // Em uma implementação real, geraria e baixaria um arquivo CSV
+        }
+        
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar lista
+            renderSeedsList();
+            updatePagination();
+            
+            // Eventos de filtro
+            searchInput.addEventListener('input', filterSeeds);
+            typeFilter.addEventListener('change', filterSeeds);
+            statusFilter.addEventListener('change', filterSeeds);
+            
+            // Eventos de paginação
+            document.getElementById('prevPage').addEventListener('click', function() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderSeedsList();
+                    updatePagination();
+                }
+            });
+            
+            document.getElementById('nextPage').addEventListener('click', function() {
+                const totalPages = Math.ceil(filteredSeeds.length / ITEMS_PER_PAGE);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderSeedsList();
+                    updatePagination();
+                }
+            });
+            
+            // Eventos dos botões
+            clearFiltersBtn.addEventListener('click', clearFilters);
+            exportBtn.addEventListener('click', exportData);
+            
+            // Eventos do modal
+            modalClose.addEventListener('click', function() {
+                modalOverlay.classList.remove('active');
+            });
+            
+            closeModalBtn.addEventListener('click', function() {
+                modalOverlay.classList.remove('active');
+            });
+            
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    modalOverlay.classList.remove('active');
+                }
+            });
+            
+            // Menu mobile
+            if (mobileMenuBtn && mainNav) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                    mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
+                        ? '<i class="fas fa-times"></i>' 
+                        : '<i class="fas fa-bars"></i>';
+                });
+            }
+            
+            // Fechar menu ao clicar fora (para mobile)
+            document.addEventListener('click', function(e) {
+                if (mainNav && mainNav.classList.contains('active') && 
+                    !mainNav.contains(e.target) && 
+                    e.target !== mobileMenuBtn) {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
